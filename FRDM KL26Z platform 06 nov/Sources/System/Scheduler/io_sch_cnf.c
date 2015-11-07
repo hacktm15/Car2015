@@ -105,7 +105,8 @@ void Io_Sch_PrjHookTask10ms(void)
 
 	/* end of Sensors trigger */
 
-	/* Operations for sensors data
+	/* Operations for sensors data */
+	/*
 	if(Io_Sens_sensorSamplesCounter == SENS_NO_OF_MEASUREMENTS)
 	{
 		Io_Sens_sensorSamplesCounter = 0;
@@ -116,7 +117,8 @@ void Io_Sch_PrjHookTask10ms(void)
 	}
 	Algo_Dc_GetAllSensorsSample();
 	Io_Sens_sensorSamplesCounter++;
-	end of Operations for sensors data */
+	*/
+	/* end of Operations for sensors data */
 }
 
 void Io_Sch_PrjHookTask50ms(void)
@@ -135,7 +137,8 @@ void Io_Sch_PrjHookTask100ms(void)
 
 	/* end of Sensors data read */
 
-	/* Get distance values from the sensors.
+	/* Get distance values from the sensors. */
+	/*
 	Algo_Dc_CalculateSensorsDistances();
 
 	if(Algo_Robo_Pp_CarTask == ALGO_ROBO_PP_CAR_TASK_PARALLEL_PARK)

@@ -1,0 +1,117 @@
+/**************************************************************************
+
+COPYRIGHT (C) $Date: Nov 3, 2015 $
+$CompanyInfo: CONTINENTAL AUTOMOTIVE GMBH $
+ALL RIGHTS RESERVED.
+
+The reproduction, transmission or use of this document or its contents is
+not permitted without express written authority.
+Offenders will be liable for damages. All rights, including rights created
+by patent grant or registration of a utility model or design, are reserved.
+---------------------------------------------------------------------------
+
+$ProjectName: FRDM KL26-Z PLATFORM $
+
+$Log: main.c $
+
+$Author: PES contribution $
+
+ ****************************************************************************/
+
+#include "System/Os/io_os.h"
+#include "System/Scheduler/io_sch_cnf.h"
+
+#include "MKL26Z4.h"
+#include "Platform_Types/std_types.h"
+#include "Platform_Types/powersar_addon_types.h"
+#include "Platform_Types/platform_types.h"
+
+#include "Other_functions/io_func.h"
+
+#include "MCU_drivers/Adc/io_adc_cnf.h"
+#include "MCU_drivers/Asy/io_asy.h"
+#include "MCU_drivers/Dio/io_dio.h"
+#include "MCU_drivers/I2c/io_i2c_cnf.h"
+#include "MCU_drivers/Int/io_int_cnf.h"
+#include "MCU_drivers/Pcs/io_pcs_cnf.h"
+#include "MCU_drivers/Timer/io_tim.h"
+#include "MCU_drivers/Tpm/io_tpm_cnf.h"
+#include "MCU_drivers/Wdt/io_wdt.h"
+
+#include "HW_drivers/H-bridge/ti8833/io_hbr_cnf_ti8833.h"
+#include "HW_drivers/Sensors/Proximity/io_sens_ir.h"
+#include "HW_drivers/Stepper_motor/io_smc_cnf.h"
+
+#include "Application/Bluetooth/io_bluetooth.h"
+#include "Application/Car_movement/app_robo_car_movement.h"
+#include "Application/Distance_calc/app_robo_dist_calc.h"
+#include "Application/Speed_calc/app_robo_speed_calc.h"
+#include "Application/Path_planner/app_robo_path_planner.h"
+
+int main(void)
+{
+	/* Temporary disable all interrupts, until all initialization interfaces have been called */
+	Io_Int_DisableInterrupts();
+
+/** Initialization calls for MCU Drivers **/
+
+	/* Call the initialization interfaces for INT (Interrupts) driver */
+	Io_Int_Initialization(Io_Int_Cnf);
+
+	/* Call the initialization interfaces for PCS (Port Control) driver */
+	Io_Pcs_Initialization(Io_Pcs_Cnf);
+
+	/* Call the initialization interfaces for ADC driver */
+	Io_Adc_Initialization(config_adc_ptr);
+
+	/* Call the initialization interfaces for TPM (Timer PWM) driver */
+	Io_Tpm_Initialization(Io_Tpm_Cnf);
+
+	/* Call the initialization interfaces for I2C driver */
+	Io_I2c_Init(Io_I2c_Cnf);
+
+	/* Call the initialization interfaces for ASY driver*/
+	Io_Asy_Initialization(&config_asy_device);
+
+	/* Call the initialization interface for WDT (Watchdog) driver (not configurable) */
+	Io_Wdt_Init();
+
+/** end of Initialization calls for MCU Drivers **/
+
+
+/** Initialization calls for HW Interfaces **/
+
+	/* Call the initialization interfaces for HBR (H-Bridge) driver */
+	Io_Hbr_Drv8833_Initialization(Io_Hbr_Drv8833_Cnf);
+
+	/* Call the initialization interfaces for SENSORS driver */
+	Io_Sens_Initialization();
+
+	/* Call the initialization interfaces for SMC (Stepper Motor Control) driver */
+	// to be called if used
+
+/** end of Initialization calls for HW Interfaces **/
+
+
+/** Initialization calls for Application interfaces **/
+
+/** end of Initialization calls for Application interfaces **/
+
+
+/** Initialization calls for Test interfaces **/
+
+/** end of Initialization calls for Test interfaces **/
+
+
+/** Initialization calls for OS & Interrupts Interfaces **/
+
+	/* Call the initialization interfaces for OS functionality */
+	Io_Os_Init();
+	 /* Interrupts enabled after all drivers initialization */
+	Io_Int_EnableInterrupts();
+	Io_Sch_StartOs(0, &Io_Sch_OsConfig[0]);
+
+/** end of Initialization calls for OS & Interrupts Interfaces **/
+
+	return 0;
+}

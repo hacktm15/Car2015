@@ -26,6 +26,12 @@ $Author: Flueran Gabriel $
 
 #include "OTHER_FUNCTIONS/io_func.h"
 
+#include "Application/Bluetooth/io_bluetooth.h"
+#include "Application/Car_movement/app_robo_car_movement.h"
+#include "Application/Distance_calc/app_robo_dist_calc.h"
+#include "Application/Speed_calc/app_robo_speed_calc.h"
+#include "Application/Path_planner/app_robo_path_planner.h"
+
 #include "io_pcs_cnf.h"
 
 /** end of Includes **/

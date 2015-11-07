@@ -33,9 +33,9 @@ const Io_Int_InterruptTypeStruct Io_Int_InterruptCnf[]=
 		{   &Io_Asy_Asy0_Isr,                               IO_INT_UART0_IRQ_NUMBER,                        IO_INT_PRIO_02      },			/* UART0 - interrupt */
 		{   &Io_Asy_Asy1_Isr,                               IO_INT_UART1_IRQ_NUMBER,                        IO_INT_PRIO_02      },			/* UART1 - interrupt */
 		{   &Io_Asy_Asy2_Isr,                               IO_INT_UART2_IRQ_NUMBER,                        IO_INT_PRIO_02      },			/* UART2 - interrupt */
-		{	&Io_Tpm_Tpm0Isr,								IO_INT_TPM0_IRQ_NUMBER,							IO_INT_PRIO_02		},			/* TPM0 - interrupt */
-		{	&Io_Tpm_Tpm1Isr,								IO_INT_TPM1_IRQ_NUMBER,							IO_INT_PRIO_02		},			/* TPM1 - interrupt */
-		{	&Io_Tpm_Tpm2Isr,								IO_INT_TPM2_IRQ_NUMBER,							IO_INT_PRIO_02		},			/* TPM2 - interrupt */
+		//{	&Io_Tpm_Tpm0Isr,								IO_INT_TPM0_IRQ_NUMBER,							IO_INT_PRIO_02		},			/* TPM0 - interrupt */
+		//{	&Io_Tpm_Tpm1Isr,								IO_INT_TPM1_IRQ_NUMBER,							IO_INT_PRIO_02		},			/* TPM1 - interrupt */
+		//{	&Io_Tpm_Tpm2Isr,								IO_INT_TPM2_IRQ_NUMBER,							IO_INT_PRIO_02		},			/* TPM2 - interrupt */
 		//{	&Io_I2C0_Isr,									IO_INT_I2C0_IRQ_NUMBER,							IO_INT_PRIO_02		},			/* I2C0 - interrupt */
 		//{	&Io_I2C1_Isr,									IO_INT_I2C1_IRQ_NUMBER,							IO_INT_PRIO_02		}			/* I2C1 - interrupt */
 };

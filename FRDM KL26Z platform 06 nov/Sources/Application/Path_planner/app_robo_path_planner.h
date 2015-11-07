@@ -79,10 +79,13 @@ $Author: Flueran Gabriel $
 #define ALGO_ROBO_PP_CAR_LENGTH_MM				200
 #define ALGO_ROBO_PP_CAR_WIDTH_MM				180
 
+#define ALGO_ROBO_PP_FRONT_REAR_DIST_THOLD_CM	10
+#define ALGO_ROBO_PP_RIGHT_LEFT_DIST_THOLD_CM	5
+
 #define ALGO_ROBO_PP_FRONT_REAR_DIST_THOLD_MM	100
 #define ALGO_ROBO_PP_RIGHT_LEFT_DIST_THOLD_MM	50
 
-#define ALGO_ROBO_PP_PARKING_DUTYCYCLE			70
+#define ALGO_ROBO_PP_PARKING_DUTYCYCLE			50
 
 /** end of Defines **/
 
@@ -99,9 +102,9 @@ extern uint8 Algo_Robo_Pp_LastCarMovement;
 extern uint16 Algo_Robo_Pp_CoveredDistanceCm;
 extern uint16 Algo_Robo_Pp_CarCurrentSpeedCmPerS;
 
-extern uint16 Algo_Robo_Pp_SpotLengthMm;
-extern uint16 Algo_Robo_Pp_MoveBackMm;
-extern uint16 Algo_Robo_Pp_MoveForwardMm;
+extern uint16 Algo_Robo_Pp_SpotLengthCm;
+extern uint16 Algo_Robo_Pp_MoveBackCm;
+extern uint16 Algo_Robo_Pp_MoveForwardCm;
 extern uint8 Algo_Robo_Pp_DistanceLastObstacleRightCm;
 
 extern uint32 Algo_Robo_Pp_TimerCarStopped;

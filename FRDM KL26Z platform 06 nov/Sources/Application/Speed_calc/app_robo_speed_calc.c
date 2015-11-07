@@ -86,6 +86,7 @@ void Algo_Robo_Sc_CalculateCarSpeed(uint16 timerMultiplierMs)
  * DESCRIPTION: Compensates the possible speed differences between the sides of the car.
  * OBSERVATIONS: -
  */
+/*
 void Algo_Robo_Sc_CarSpeedCompensation(uint16 speedTolerance, uint32 pwmChannelLeft, uint32 pwmChannelRight)
 {
 	uint16 LeftSpeed = Algo_Robo_Sc_LeftEncoder.SpeedCmperS;
@@ -120,5 +121,5 @@ void Algo_Robo_Sc_CarSpeedCompensation(uint16 speedTolerance, uint32 pwmChannelL
 	}
 	else {}
 }
-
+*/
 /** end of Functions implementation **/

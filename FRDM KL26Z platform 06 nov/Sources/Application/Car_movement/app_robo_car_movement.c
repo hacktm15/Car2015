@@ -70,10 +70,12 @@ void Algo_Robo_Cm_InitializeCarMovement(void)
  */
 void Algo_Robo_Cm_UpdateCarSpeed(uint8 direction,uint16 dutycycle)
 {
-	Io_Hbr_Drv8833_Update(direction,dutycycle,IO_HBR_MOTORS_LEFT);
-	Io_Hbr_Drv8833_Update(direction,dutycycle,IO_HBR_MOTORS_RIGHT);
+	uint16 dutycycleHex = IO_TPM_PERCENT_TO_4000HEX(dutycycle);
 
-	Algo_Robo_Pp_CarCurrentSpeedCmPerS = ALGO_ROBO_SC_CALCULATE_CAR_SPEED(dutycycle);
+	Io_Hbr_Drv8833_Update(direction,dutycycleHex,IO_HBR_MOTORS_LEFT);
+	Io_Hbr_Drv8833_Update(direction,dutycycleHex,IO_HBR_MOTORS_RIGHT);
+
+	//Algo_Robo_Pp_CarCurrentSpeedCmPerS = ALGO_ROBO_SC_CALCULATE_CAR_SPEED(dutycycle);
 }
 
 /* FUNCTION NAME: Algo_Robo_Cm_MoveCarForward
@@ -112,13 +114,16 @@ void Algo_Robo_Cm_MoveCarBackward(uint16 dutycycle)
  */
 void Algo_Robo_Cm_RotateCarLeft(uint16 dutycycle)
 {
-	dutycycle = Algo_Robo_Cm_LimitDutycycle(dutycycle);
+	uint16 dutycycleHex;
 
-	Io_Hbr_Drv8833_Update(IO_HBR_DRV8833_STATE_REVERSE,dutycycle,IO_HBR_MOTORS_LEFT);
-	Io_Hbr_Drv8833_Update(IO_HBR_DRV8833_STATE_FORWARD,dutycycle,IO_HBR_MOTORS_RIGHT);
+	dutycycle = Algo_Robo_Cm_LimitDutycycle(dutycycle);
+	dutycycleHex = IO_TPM_PERCENT_TO_4000HEX(dutycycle);
+
+	Io_Hbr_Drv8833_Update(IO_HBR_DRV8833_STATE_REVERSE,dutycycleHex,IO_HBR_MOTORS_LEFT);
+	Io_Hbr_Drv8833_Update(IO_HBR_DRV8833_STATE_FORWARD,dutycycleHex,IO_HBR_MOTORS_RIGHT);
 	Algo_Robo_Pp_CarMovement = ALGO_ROBO_PP_CAR_ROTATING_LEFT;
 
-	Algo_Robo_Pp_CarCurrentSpeedCmPerS = 0;
+	//Algo_Robo_Pp_CarCurrentSpeedCmPerS = 0;
 }
 
 /* FUNCTION NAME: Algo_Robo_Cm_RotateCarRight
@@ -129,13 +134,16 @@ void Algo_Robo_Cm_RotateCarLeft(uint16 dutycycle)
  */
 void Algo_Robo_Cm_RotateCarRight(uint16 dutycycle)
 {
-	dutycycle = Algo_Robo_Cm_LimitDutycycle(dutycycle);
+	uint16 dutycycleHex;
 
-	Io_Hbr_Drv8833_Update(IO_HBR_DRV8833_STATE_FORWARD,dutycycle,IO_HBR_MOTORS_LEFT);
-	Io_Hbr_Drv8833_Update(IO_HBR_DRV8833_STATE_REVERSE,dutycycle,IO_HBR_MOTORS_RIGHT);
+	dutycycle = Algo_Robo_Cm_LimitDutycycle(dutycycle);
+	dutycycleHex = IO_TPM_PERCENT_TO_4000HEX(dutycycle);
+
+	Io_Hbr_Drv8833_Update(IO_HBR_DRV8833_STATE_FORWARD,dutycycleHex,IO_HBR_MOTORS_LEFT);
+	Io_Hbr_Drv8833_Update(IO_HBR_DRV8833_STATE_REVERSE,dutycycleHex,IO_HBR_MOTORS_RIGHT);
 	Algo_Robo_Pp_CarMovement = ALGO_ROBO_PP_CAR_ROTATING_RIGHT;
 
-	Algo_Robo_Pp_CarCurrentSpeedCmPerS = 0;
+	//Algo_Robo_Pp_CarCurrentSpeedCmPerS = 0;
 }
 
 /* FUNCTION NAME: Algo_Robo_Cm_BreakCar
@@ -150,7 +158,7 @@ void Algo_Robo_Cm_BreakCar(void)
 	Io_Hbr_Drv8833_Set_State(IO_HBR_MOTORS_RIGHT,IO_HBR_DRV8833_STATE_BRAKE);
 	Algo_Robo_Pp_CarMovement = ALGO_ROBO_PP_CAR_STOPPED;
 
-	Algo_Robo_Pp_CarCurrentSpeedCmPerS = 0;
+	//Algo_Robo_Pp_CarCurrentSpeedCmPerS = 0;
 }
 
 /* FUNCTION NAME: Algo_Robo_Cm_StopCar
@@ -165,7 +173,7 @@ void Algo_Robo_Cm_StopCar(void)
 	Io_Hbr_Drv8833_Set_State(IO_HBR_MOTORS_RIGHT,IO_HBR_DRV8833_STATE_BRAKE);
 	Algo_Robo_Pp_CarMovement = ALGO_ROBO_PP_CAR_STOPPED;
 
-	Algo_Robo_Pp_CarCurrentSpeedCmPerS = 0;
+	//Algo_Robo_Pp_CarCurrentSpeedCmPerS = 0;
 }
 
 /* FUNCTION NAME: Algo_Robo_Cm_LimitDutycycle

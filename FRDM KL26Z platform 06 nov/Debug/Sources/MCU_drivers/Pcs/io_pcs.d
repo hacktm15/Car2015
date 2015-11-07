@@ -14,6 +14,11 @@ Sources/MCU_drivers/Pcs/io_pcs.o: ../Sources/MCU_drivers/Pcs/io_pcs.c \
  ../Sources/MCU_drivers/Pcs/io_pcs_cnf.h \
  ../Sources/MCU_drivers/Pcs/io_pcs.h ../Sources/MCU_drivers/Tpm/io_tpm.h \
  ../Sources/OTHER_FUNCTIONS/io_func.h \
+ ../Sources/Application/Bluetooth/io_bluetooth.h \
+ ../Sources/Application/Car_movement/app_robo_car_movement.h \
+ ../Sources/Application/Distance_calc/app_robo_dist_calc.h \
+ ../Sources/Application/Speed_calc/app_robo_speed_calc.h \
+ ../Sources/Application/Path_planner/app_robo_path_planner.h \
  ../Sources/MCU_drivers/Pcs/io_pcs_cnf.h
 
 ../Sources/MCU_drivers/Dio/io_dio.h:
@@ -61,5 +66,15 @@ Sources/MCU_drivers/Pcs/io_pcs.o: ../Sources/MCU_drivers/Pcs/io_pcs.c \
 ../Sources/MCU_drivers/Tpm/io_tpm.h:
 
 ../Sources/OTHER_FUNCTIONS/io_func.h:
+
+../Sources/Application/Bluetooth/io_bluetooth.h:
+
+../Sources/Application/Car_movement/app_robo_car_movement.h:
+
+../Sources/Application/Distance_calc/app_robo_dist_calc.h:
+
+../Sources/Application/Speed_calc/app_robo_speed_calc.h:
+
+../Sources/Application/Path_planner/app_robo_path_planner.h:
 
 ../Sources/MCU_drivers/Pcs/io_pcs_cnf.h:

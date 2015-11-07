@@ -73,7 +73,7 @@ all: FRDM\ KL26Z\ platform.elf secondary-outputs
 FRDM\ KL26Z\ platform.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross ARM C++ Linker'
-	arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -T "MKL26Z128xxx4_flash.ld" -Xlinker --gc-sections -L"D:/# Projects - Kinetis/HackTM 2015/FRDM KL26Z platform 06 nov/Project_Settings/Linker_Files" -Wl,-Map,"FRDM KL26Z platform.map" -specs=nano.specs -specs=nosys.specs -o "FRDM KL26Z platform.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -T "MKL26Z128xxx4_flash.ld" -Xlinker --gc-sections -L"C:/Users/Gabi/Desktop/HackTM/FRDM KL26Z platform 06 nov/Project_Settings/Linker_Files" -Wl,-Map,"FRDM KL26Z platform.map" -specs=nano.specs -specs=nosys.specs -o "FRDM KL26Z platform.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

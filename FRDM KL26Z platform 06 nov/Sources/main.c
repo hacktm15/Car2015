@@ -83,7 +83,8 @@ int main(void)
 
 	/* Call the initialization interfaces for HBR (H-Bridge) driver */
 	Io_Hbr_Drv8833_Initialization(Io_Hbr_Drv8833_Cnf);
-
+	//test:
+	//test:
 	Io_Hbr_Drv8833_Update(IO_HBR_DRV8833_STATE_FORWARD,0x2000,IO_HBR_MOTORS_LEFT);
 	Io_Hbr_Drv8833_Update(IO_HBR_DRV8833_STATE_FORWARD,0x2000,IO_HBR_MOTORS_RIGHT);
 
@@ -97,6 +98,19 @@ int main(void)
 
 
 /** Initialization calls for Application interfaces **/
+
+	/* Call the initialization interfaces for Car Movement module */
+		Algo_Robo_Cm_InitializeCarMovement();
+
+		/* Call the initialization interfaces for Distance Calculation module */
+		// none so far
+
+		/* Call the initialization interfaces for Path Planner module */
+		Algo_Robo_Pp_InitializePathPlanner();
+
+		/* Call the initialization interfaces for Speed Calculation module */
+		Algo_Robo_Sc_InitializeSpeedCalc();
+
 
 /** end of Initialization calls for Application interfaces **/
 

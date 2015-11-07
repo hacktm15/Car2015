@@ -1,0 +1,165 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:gravity="center_horizontal"
+    android:orientation="vertical" android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" tools:context=".Controller"
+    android:weightSum="1">
+
+    <!-- Login progress -->
+    <ProgressBar android:id="@+id/login_progress" style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp" android:visibility="gone" />
+
+    <ScrollView android:id="@+id/login_form" android:layout_width="match_parent"
+        android:layout_height="129dp">
+
+        <LinearLayout android:id="@+id/path_transmission" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:orientation="vertical">
+
+            <EditText android:id="@+id/path" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:hint="@string/prompt_path"
+                android:inputType="text" android:maxLines="1"
+                android:singleLine="true" />
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello world" />
+
+    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:columnCount="3"
+        android:orientation="horizontal" >
+
+
+        <Button android:text="M"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/m_button"
+            />
+
+        <Button android:text="FW"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/forward_button"
+            />
+
+        <Button android:text="+"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/plus_button"
+            />
+
+        <Button android:text="LEFT"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/left_button"
+            />
+
+        <Button android:text="STOP"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/stop_button"
+            />
+
+        <Button android:text="RIGHT"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/right_button"
+            />
+
+
+        <Button android:text="PARK"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/park_button"
+            />
+
+        <Button android:text="BW"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/backward_button"
+            />
+
+        <Button android:text="-"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/minus_button"
+            />
+        <Button
+            android:id="@+id/photo_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Photo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="FORWARD"
+            android:id="@+id/forward"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="LEFT"
+            android:id="@+id/left"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="SPEED"
+            android:id="@+id/speed"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="RIGHT"
+            android:id="@+id/right"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="BACKWARD"
+            android:id="@+id/backward"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+
+
+    </GridLayout>
+
+
+
+</LinearLayout>
+

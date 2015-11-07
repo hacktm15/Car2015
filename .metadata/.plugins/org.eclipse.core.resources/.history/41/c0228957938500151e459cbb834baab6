@@ -1,0 +1,723 @@
+/**************************************************************************
+
+COPYRIGHT (C) $Date: Aug 31, 2015 $
+$CompanyInfo: CONTINENTAL AUTOMOTIVE GMBH $
+ALL RIGHTS RESERVED.
+
+The reproduction, transmission or use of this document or its contents is
+not permitted without express written authority.
+Offenders will be liable for damages. All rights, including rights created
+by patent grant or registration of a utility model or design, are reserved.
+---------------------------------------------------------------------------
+
+$ProjectName: FRDM KL26-Z PLATFORM $
+
+$Log: app_robo_path_planner.c $
+
+$Author: Flueran Gabriel $
+
+ ****************************************************************************/
+
+#include "MCU_drivers/Tpm/io_tpm_cnf.h"
+
+#include "HW_drivers/H-bridge/ti8833/io_hbr_cnf_ti8833.h"
+#include "HW_drivers/Sensors/Proximity/io_sens_ir.h"
+
+#include "Application/Bluetooth/io_bluetooth.h"
+#include "Application/Car_movement/app_robo_car_movement.h"
+#include "Application/Distance_calc/app_robo_dist_calc.h"
+#include "Application/Speed_calc/app_robo_speed_calc.h"
+#include "Application/Path_planner/app_robo_path_planner.h"
+
+#include "app_robo_path_planner.h"
+
+/** Global variables and constants **/
+
+uint8 Algo_Robo_Pp_CarTask;
+
+uint8 Algo_Robo_Pp_CarState;
+uint8 Algo_Robo_Pp_LastCarState;
+
+uint8 Algo_Robo_Pp_CarMovement;
+uint8 Algo_Robo_Pp_LastCarMovement;
+
+uint16 Algo_Robo_Pp_CoveredDistanceCm;
+uint16 Algo_Robo_Pp_CarCurrentSpeedCmPerS;
+
+uint16 Algo_Robo_Pp_SpotLengthCm;
+uint16 Algo_Robo_Pp_MoveBackCm;
+uint16 Algo_Robo_Pp_MoveForwardCm;
+uint8 Algo_Robo_Pp_DistanceLastObstacleRightCm;
+
+uint32 Algo_Robo_Pp_TimerCarStopped;
+uint32 Algo_Robo_Pp_TimerCarMoveForward;
+uint32 Algo_Robo_Pp_TimerCarMoveBackward;
+uint32 Algo_Robo_Pp_TimerCarRotateLeft;
+uint32 Algo_Robo_Pp_TimerCarRotateRight;
+
+uint32 Algo_Robo_Pp_TimerPendingState;
+uint32 Algo_Robo_Pp_TimerDefaultState;
+uint32 Algo_Robo_Pp_TimerInitialState;
+uint32 Algo_Robo_Pp_TimerSpotDetectionState;
+uint32 Algo_Robo_Pp_TimerSpotCalcState;
+uint32 Algo_Robo_Pp_TimerSpotDetectedState;
+uint32 Algo_Robo_Pp_TimerParallelParkState;
+uint32 Algo_Robo_Pp_TimerCarParkedState;
+
+uint8 Algo_Robo_Pp_ParallelParkFlag;
+
+/** end of Global variables and constants **/
+
+/** Functions implementation **/
+
+/* TODO FLUERAN: implement incremental acceleration */
+/*** TODO FLUERAN: not used in this release; Sept 29, 2015
+void Algo_Robo_Pp_IncrementalCarAcceleration(uint16 finalDutycycle, uint8 step)
+{
+	uint32 channel;
+	uint8 index;
+	uint8 currentDutycycle;
+
+	channel = Io_Hbr_Cnf->hbr_pin_ptr[IO_HBR_1_A].hbr_pwm;
+	index = IO_TPM_GET_INDEX(channel);
+	currentDutycycle = IO_TPM_4000HEX_TO_PERCENT(Io_Tpm_PwmChLastDutycycle[index])
+
+}
+ ***/
+/* end of TODO */
+
+/* FUNCTION NAME: Algo_Robo_Pp_InitializePathPlanner
+ * RETURN TYPE: void
+ * PARAMETERS: void
+ * DESCRIPTION: Initializes the variables used by the Path Planner module.
+ * OBSERVATIONS: -
+ */
+void Algo_Robo_Pp_InitializePathPlanner(void)
+{
+	Algo_Robo_Pp_CarTask = ALGO_ROBO_PP_CAR_TASK_DEFAULT;
+
+	Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_DEFAULT;
+	Algo_Robo_Pp_LastCarState = ALGO_ROBO_PP_CAR_STATE_DEFAULT;
+
+	Algo_Robo_Pp_CarMovement = ALGO_ROBO_PP_CAR_STOPPED;
+	Algo_Robo_Pp_LastCarMovement = ALGO_ROBO_PP_CAR_STOPPED;
+
+	Algo_Robo_Pp_CoveredDistanceCm = 0;
+	Algo_Robo_Pp_CarCurrentSpeedCmPerS = 0;
+
+	Algo_Robo_Pp_SpotLengthCm = 0;
+	Algo_Robo_Pp_MoveBackCm = 0;
+	Algo_Robo_Pp_MoveForwardCm = 0;
+	Algo_Robo_Pp_DistanceLastObstacleRightCm = 0;
+
+	Algo_Robo_Pp_TimerCarStopped = 0;
+	Algo_Robo_Pp_TimerCarMoveForward = 0;
+	Algo_Robo_Pp_TimerCarMoveBackward = 0;
+	Algo_Robo_Pp_TimerCarRotateLeft = 0;
+	Algo_Robo_Pp_TimerCarRotateRight = 0;
+
+	Algo_Robo_Pp_TimerPendingState = 0;
+	Algo_Robo_Pp_TimerDefaultState = 0;
+	Algo_Robo_Pp_TimerInitialState = 0;
+	Algo_Robo_Pp_TimerSpotDetectionState = 0;
+	Algo_Robo_Pp_TimerSpotCalcState = 0;
+	Algo_Robo_Pp_TimerSpotDetectedState = 0;
+	Algo_Robo_Pp_TimerParallelParkState = 0;
+	Algo_Robo_Pp_TimerCarParkedState = 0;
+
+	Algo_Robo_Pp_ParallelParkFlag = TRUE;
+}
+
+/* FUNCTION NAME: Algo_Robo_Pp_StartParallelParking
+ * RETURN TYPE: void
+ * PARAMETERS: void
+ * DESCRIPTION: Starts the Parallel Parking algorithm.
+ * OBSERVATIONS: -
+ */
+void Algo_Robo_Pp_StartParallelParking(void)
+{
+	if(Io_Sens_sensorFrontDistanceCm < ALGO_ROBO_PP_FRONT_REAR_DIST_THOLD_CM)
+	{
+		// Obstacle in front of car; car is put in PENDING state.
+		Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_PENDING;
+		Algo_Robo_Pp_TimerPendingState = 0;
+	}
+	else
+	{
+		// No obstacle in front of car; car moves forward and is put in INITIAL state.
+		Algo_Robo_Cm_MoveCarForward(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
+		Algo_Robo_Pp_CarTask = ALGO_ROBO_PP_CAR_TASK_PARALLEL_PARK;
+		Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_INITIAL;
+		Algo_Robo_Pp_TimerInitialState = 0;
+	}
+}
+
+/* FUNCTION NAME: Algo_Robo_Pp_ParallelParkingAlgorithm
+ * RETURN TYPE: void
+ * PARAMETERS: void
+ * DESCRIPTION: The algorithm to park the car when free parking place is spotted.
+ * OBSERVATIONS: -
+ */
+void Algo_Robo_Pp_ParallelParkingAlgorithm(void)
+{
+	if(Io_Sens_sensorRearDistanceCm < ALGO_ROBO_PP_FRONT_REAR_DIST_THOLD_CM)
+	{
+		// Obstacle in front of car; car is put in PENDING state.
+		Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_PENDING;
+		Algo_Robo_Pp_TimerPendingState = 0;
+	}
+	else
+	{
+		// Calculate the "trajectory" of the car to the free spot detected.
+		Algo_Robo_Pp_MoveBackCm = (Algo_Robo_Pp_SpotLengthCm / 2) - ALGO_ROBO_PP_SENSOR_PLACEMENT_ERROR_CM;
+
+		// No obstacle behind car; car moves backwards and is put in PARALLEL PARKING state.
+		Algo_Robo_Cm_MoveCarBackward(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
+
+		Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_PARALLEL_PARK;
+		Algo_Robo_Pp_TimerParallelParkState = 0;
+	}
+}
+
+/* FUNCTION NAME: Algo_Robo_Pp_CarDecisionParallelPark
+ * RETURN TYPE: void
+ * PARAMETERS: void
+ * DESCRIPTION: Make the next decision when parallel parking, taking into account the current and previous movement state.
+ * OBSERVATIONS: -
+ */
+void Algo_Robo_Pp_CarDecisionParallelPark(void)
+{
+	switch(Algo_Robo_Pp_CarMovement)
+	{
+	case ALGO_ROBO_PP_CAR_STOPPED:
+	{
+		switch(Algo_Robo_Pp_LastCarMovement)
+		{
+		case ALGO_ROBO_PP_CAR_MOVING_BACKWARD:
+		{
+			// Car is rotated 90 deg to the right.
+			/* TODO FLUERAN: comunicatie cu telefonul => unghiul de rotire */
+			Algo_Robo_Pp_TimerCarRotateRight = Algo_Robo_Pp_CalculateRotationTime(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
+			Algo_Robo_Cm_RotateCarRight(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
+			break;
+		}
+		case ALGO_ROBO_PP_CAR_ROTATING_RIGHT:
+		{
+			if(Io_Sens_sensorFrontDistanceCm < ALGO_ROBO_PP_FRONT_REAR_DIST_THOLD_CM)
+			{
+				// Obstacle in front of car; car is put in PENDING state.
+
+				Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_PENDING;
+				Algo_Robo_Pp_TimerPendingState = 0;
+			}
+			else
+			{
+				// Car moves forward.
+				Algo_Robo_Pp_MoveForwardCm = (uint16)((ALGO_ROBO_PP_CAR_WIDTH_MM / 2) + (uint16)(Algo_Robo_Pp_DistanceLastObstacleRightCm * 10) + ALGO_ROBO_PP_SENSOR_PLACEMENT_ERROR_MM);
+				Algo_Robo_Cm_MoveCarForward(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
+			}
+			break;
+		}
+		case ALGO_ROBO_PP_CAR_MOVING_FORWARD:
+		{
+			// Car is rotated 90 deg to the left.
+			/* TODO FLUERAN: comunicatie cu telefonul => unghiul de rotire */
+			Algo_Robo_Pp_TimerCarRotateLeft = Algo_Robo_Pp_CalculateRotationTime(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
+			Algo_Robo_Cm_RotateCarLeft(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
+			break;
+		}
+		case ALGO_ROBO_PP_CAR_ROTATING_LEFT: { break; }
+		case ALGO_ROBO_PP_CAR_STOPPED: { break; }
+		default: break;
+		}
+		break;
+	}
+	case ALGO_ROBO_PP_CAR_MOVING_BACKWARD:
+	{
+		if(Io_Sens_sensorRearDistanceCm < ALGO_ROBO_PP_FRONT_REAR_DIST_THOLD_CM)
+		{
+			// Obstacle behind car; car is STOPPED and put in PENDING state.
+			Algo_Robo_Cm_StopCar();
+
+			Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_PENDING;
+			Algo_Robo_Pp_TimerPendingState = 0;
+		}
+		else
+		{
+			if(Algo_Robo_Pp_MoveBackCm == 0)
+			{
+				// Car has covered the backward distance needed; car is STOPPED.
+				Algo_Robo_Cm_StopCar();
+			}
+			else
+			{
+				// Car keeps moving backwards.
+			}
+			//Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_PARALLEL_PARK;
+		}
+		Algo_Robo_Pp_LastCarMovement = ALGO_ROBO_PP_CAR_MOVING_BACKWARD;
+
+		break;
+	}
+	case ALGO_ROBO_PP_CAR_ROTATING_RIGHT:
+	{
+		if(Algo_Robo_Pp_TimerCarRotateRight == 0)
+		{
+			// Car has rotated with the angle needed; car is STOPPED.
+			Algo_Robo_Cm_StopCar();
+		}
+		else
+		{
+			// Car keeps rotating right.
+		}
+		//Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_PARALLEL_PARK;
+		Algo_Robo_Pp_LastCarMovement = ALGO_ROBO_PP_CAR_ROTATING_RIGHT;
+
+		break;
+	}
+	case ALGO_ROBO_PP_CAR_MOVING_FORWARD:
+	{
+		if(Io_Sens_sensorFrontDistanceCm < ALGO_ROBO_PP_FRONT_REAR_DIST_THOLD_CM)
+		{
+			// Obstacle in front of car; car is STOPPED and put in PENDING state.
+			Algo_Robo_Cm_StopCar();
+
+			Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_PENDING;
+			Algo_Robo_Pp_TimerPendingState = 0;
+		}
+		else
+		{
+			if(Algo_Robo_Pp_MoveForwardCm == 0)
+			{
+				// Car has covered the forward distance needed; car is STOPPED.
+				Algo_Robo_Cm_StopCar();
+			}
+			else
+			{
+				// Car keeps moving forward.
+			}
+			//Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_PARALLEL_PARK;
+		}
+		Algo_Robo_Pp_LastCarMovement = ALGO_ROBO_PP_CAR_MOVING_FORWARD;
+
+		break;
+	}
+	case ALGO_ROBO_PP_CAR_ROTATING_LEFT:
+	{
+		if(Algo_Robo_Pp_TimerCarRotateLeft == 0)
+		{
+			// Car has rotated with the angle needed; car is STOPPED and put in CAR PARKED state.
+			Algo_Robo_Cm_StopCar();
+			Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_CAR_PARKED;
+		}
+		else
+		{
+			// Car keeps rotating left; car still in PARALLEL PARK state.
+			//Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_PARALLEL_PARK;
+		}
+		Algo_Robo_Pp_LastCarMovement = ALGO_ROBO_PP_CAR_ROTATING_LEFT;
+
+		break;
+	}
+	default: break;
+	}
+}
+
+/* FUNCTION NAME: Algo_Robo_Pp_CarDecisionScheduler
+ * RETURN TYPE: void
+ * PARAMETERS: void
+ * DESCRIPTION:
+ * OBSERVATIONS: -
+ */
+void Algo_Robo_Pp_CarDecisionScheduler(void)
+{
+	switch(Algo_Robo_Pp_CarState)
+	{
+	case ALGO_ROBO_PP_CAR_STATE_DEFAULT:
+	{
+		Algo_Robo_Pp_TimerDefaultState++;
+		break;
+	}
+	case ALGO_ROBO_PP_CAR_STATE_INITIAL:
+	{
+		Algo_Robo_Pp_TimerInitialState++;
+		break;
+	}
+	case ALGO_ROBO_PP_CAR_STATE_SPOT_DETECTION:
+	{
+		Algo_Robo_Pp_TimerSpotDetectionState++;
+		break;
+	}
+	case ALGO_ROBO_PP_CAR_STATE_SPOT_CALC:
+	{
+		Algo_Robo_Pp_TimerSpotCalcState++;
+		// Add the distance covered in 200ms to the calculated spot length.
+		Algo_Robo_Pp_SpotLengthCm = Algo_Robo_Pp_SpotLengthCm + Algo_Robo_Pp_CoveredDistanceCm;
+
+		break;
+	}
+	case ALGO_ROBO_PP_CAR_STATE_SPOT_DETECTED:
+	{
+		Algo_Robo_Pp_TimerSpotDetectedState++;
+		break;
+	}
+	case ALGO_ROBO_PP_CAR_STATE_PARALLEL_PARK:
+	{
+		Algo_Robo_Pp_TimerParallelParkState++;
+
+		switch(Algo_Robo_Pp_CarMovement)
+		{
+		case ALGO_ROBO_PP_CAR_STOPPED:
+		{
+			Algo_Robo_Pp_TimerCarStopped++;
+			break;
+		}
+		case ALGO_ROBO_PP_CAR_MOVING_BACKWARD:
+		{
+			Algo_Robo_Pp_TimerCarMoveBackward++;
+			if(Algo_Robo_Pp_MoveBackCm < (uint16)(Algo_Robo_Pp_MoveBackCm - (Algo_Robo_Pp_CarCurrentSpeedCmPerS / ALGO_ROBO_SC_TASK_DIVIDER)))
+			{
+				Algo_Robo_Pp_MoveBackCm = 0;
+			}
+			else
+			{
+				Algo_Robo_Pp_MoveBackCm = Algo_Robo_Pp_MoveBackCm - (Algo_Robo_Pp_CarCurrentSpeedCmPerS / ALGO_ROBO_SC_TASK_DIVIDER);
+			}
+			break;
+		}
+		case ALGO_ROBO_PP_CAR_ROTATING_RIGHT:
+		{
+			if(Algo_Robo_Pp_TimerCarRotateRight > 0)
+			{
+				Algo_Robo_Pp_TimerCarRotateRight--;
+			}
+			else
+			{
+				// Timer should stop decreasing.
+			}
+			break;
+		}
+		case ALGO_ROBO_PP_CAR_MOVING_FORWARD:
+		{
+			Algo_Robo_Pp_TimerCarMoveForward++;
+			if(Algo_Robo_Pp_MoveForwardCm < (uint16)(Algo_Robo_Pp_MoveForwardCm - (Algo_Robo_Pp_CarCurrentSpeedCmPerS / ALGO_ROBO_SC_TASK_DIVIDER)))
+			{
+				Algo_Robo_Pp_MoveForwardCm = 0;
+			}
+			else
+			{
+				Algo_Robo_Pp_MoveForwardCm = Algo_Robo_Pp_MoveForwardCm - (Algo_Robo_Pp_CarCurrentSpeedCmPerS / ALGO_ROBO_SC_TASK_DIVIDER);
+			}
+			break;
+		}
+		case ALGO_ROBO_PP_CAR_ROTATING_LEFT:
+		{
+			if(Algo_Robo_Pp_TimerCarRotateLeft > 0)
+			{
+				Algo_Robo_Pp_TimerCarRotateLeft--;
+			}
+			else
+			{
+				// Timer should stop decreasing.
+			}
+			break;
+		}
+		default: break;
+		}
+
+		break;
+	}
+	case ALGO_ROBO_PP_CAR_STATE_CAR_PARKED:
+	{
+		Algo_Robo_Pp_TimerCarParkedState++;
+		break;
+	}
+	case ALGO_ROBO_PP_CAR_STATE_PENDING:
+	{
+		Algo_Robo_Pp_TimerPendingState++;
+		break;
+	}
+	default: break;
+	}
+}
+
+/* FUNCTION NAME: Algo_Robo_Pp_DetermineNextCarState
+ * RETURN TYPE: void
+ * PARAMETERS: void
+ * DESCRIPTION:
+ * OBSERVATIONS: -
+ */
+void Algo_Robo_Pp_DetermineNextCarState(void)
+{
+	switch(Algo_Robo_Pp_CarState)
+	{
+	case ALGO_ROBO_PP_CAR_STATE_DEFAULT:
+	{
+		Algo_Robo_Pp_LastCarState = ALGO_ROBO_PP_CAR_STATE_DEFAULT;
+
+		break;
+	}
+
+	case ALGO_ROBO_PP_CAR_STATE_INITIAL:
+	{
+		if(Io_Sens_sensorFrontDistanceCm < ALGO_ROBO_PP_FRONT_REAR_DIST_THOLD_CM)
+		{
+			// Obstacle in front of car; car is STOPPED and put in PENDING state.
+			if(Algo_Robo_Pp_CarMovement != ALGO_ROBO_PP_CAR_STOPPED)
+			{
+				Algo_Robo_Cm_StopCar();
+			}
+			else
+			{
+				// Car is already STOPPED; do nothing.
+			}
+
+			Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_PENDING;
+			Algo_Robo_Pp_TimerPendingState = 0;
+		}
+		else
+		{
+			// No obstacle in front of car; car is put in SPOT DETECTION state.
+			Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_SPOT_DETECTION;
+			Algo_Robo_Pp_TimerSpotDetectionState = 0;
+		}
+		Algo_Robo_Pp_LastCarState = ALGO_ROBO_PP_CAR_STATE_INITIAL;
+
+		break;
+	}
+	case ALGO_ROBO_PP_CAR_STATE_SPOT_DETECTION:
+	{
+		if(Io_Sens_sensorFrontDistanceCm < ALGO_ROBO_PP_FRONT_REAR_DIST_THOLD_CM)
+		{
+			// Obstacle in front of car; car is STOPPED and put in PENDING state.
+			if(Algo_Robo_Pp_CarMovement != ALGO_ROBO_PP_CAR_STOPPED)
+			{
+				Algo_Robo_Cm_StopCar();
+			}
+			else
+			{
+				// Car is already STOPPED; do nothing.
+			}
+
+			Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_PENDING;
+			Algo_Robo_Pp_TimerPendingState = 0;
+		}
+		else
+		{
+			// No obstacle in front of car; car MOVES forward.
+			if(Io_Sens_sensorRightDistanceCm > ALGO_ROBO_PP_CAR_WIDTH_CM)
+			{
+				// Free spot detected to the right; car is put in SPOT CALCULATION state.
+				Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_SPOT_CALC;
+				Algo_Robo_Pp_TimerSpotCalcState = 0;
+				Algo_Robo_Pp_SpotLengthCm = 0;
+			}
+			else
+			{
+				// No free spot detected; car remains in SPOT DETECTION state (current).
+				Algo_Robo_Pp_DistanceLastObstacleRightCm = Io_Sens_sensorRightDistanceCm;
+			}
+		}
+		Algo_Robo_Pp_LastCarState = ALGO_ROBO_PP_CAR_STATE_SPOT_DETECTION;
+
+		break;
+	}
+	case ALGO_ROBO_PP_CAR_STATE_SPOT_CALC:
+	{
+		if(Io_Sens_sensorFrontDistanceCm < ALGO_ROBO_PP_FRONT_REAR_DIST_THOLD_CM)
+		{
+			// Obstacle in front of car; car is STOPPED and put in PENDING state.
+			if(Algo_Robo_Pp_CarMovement != ALGO_ROBO_PP_CAR_STOPPED)
+			{
+				Algo_Robo_Cm_StopCar();
+			}
+			else
+			{
+				// Car is already STOPPED; do nothing.
+			}
+
+			Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_PENDING;
+		}
+		else
+		{
+			// No obstacle in front of car; car CAN MOVE forward.
+		}
+		if(Algo_Robo_Pp_SpotLengthCm > ALGO_ROBO_PP_CAR_LENGTH_MM)
+		{
+			// Spot is LONG ENOUGH.
+			if(Algo_Robo_Pp_CarMovement != ALGO_ROBO_PP_CAR_STOPPED)
+			{
+				Algo_Robo_Cm_StopCar();
+			}
+			else
+			{
+				// Car is already STOPPED; do nothing.
+			}
+
+			Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_SPOT_DETECTED;
+			Algo_Robo_Pp_TimerSpotDetectedState = 0;
+		}
+		else
+		{
+			// Spot is NOT long enough;
+			if(Algo_Robo_Pp_CarState == ALGO_ROBO_PP_CAR_STATE_PENDING)
+			{
+				// Car has already been STOPPED; car remains in PENDING state (set above).
+				Algo_Robo_Pp_TimerPendingState = 0;
+			}
+			else
+			{
+				// Car hasn't been stopped.
+				if(Io_Sens_sensorRightDistanceCm > ALGO_ROBO_PP_CAR_WIDTH_CM)
+				{
+					// Free space to the right; car remains in SPOT CALCULATION state (current).
+				}
+				else
+				{
+					// No free space to the right; car is put in SPOT DETECTION state.
+					Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_SPOT_DETECTION;
+					Algo_Robo_Pp_TimerSpotDetectionState = 0;
+				}
+			}
+		}
+		Algo_Robo_Pp_LastCarState = ALGO_ROBO_PP_CAR_STATE_SPOT_CALC;
+
+		break;
+	}
+	case ALGO_ROBO_PP_CAR_STATE_SPOT_DETECTED:
+	{
+		// Parallel parking algorithm is started.
+		Algo_Robo_Pp_ParallelParkingAlgorithm();
+		Algo_Robo_Pp_LastCarState = ALGO_ROBO_PP_CAR_STATE_SPOT_DETECTED;
+
+		break;
+	}
+	case ALGO_ROBO_PP_CAR_STATE_PARALLEL_PARK:
+	{
+		// Decide what to do next when parallel parking.
+		Algo_Robo_Pp_CarDecisionParallelPark();
+		Algo_Robo_Pp_LastCarState = ALGO_ROBO_PP_CAR_STATE_PARALLEL_PARK;
+
+		break;
+
+	}
+	case ALGO_ROBO_PP_CAR_STATE_CAR_PARKED:
+	{
+		// Parallel Parking algorithm successful; car is put in DEFAULT state and task.
+		Algo_Robo_Pp_LastCarState = ALGO_ROBO_PP_CAR_STATE_CAR_PARKED;
+
+		break;
+	}
+	case ALGO_ROBO_PP_CAR_STATE_PENDING:
+	{
+		if(Algo_Robo_Pp_TimerPendingState < ALGO_ROBO_PP_CAR_PENDING_TIMER_MAX)
+		{
+			// Maximum PENDING time not exceeded.
+			if(Io_Sens_sensorFrontDistanceCm < ALGO_ROBO_PP_FRONT_REAR_DIST_THOLD_CM)
+			{
+				// Obstacle still in front of car; car remains in PENDING state.
+			}
+			else
+			{
+				// Obstacle removed from car front; car is put in the previous state.
+				switch(Algo_Robo_Pp_LastCarState)
+				{
+				case ALGO_ROBO_PP_CAR_STATE_DEFAULT:
+				{
+					Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_DEFAULT;
+					Algo_Robo_Pp_StartParallelParking();
+					break;
+				}
+				case ALGO_ROBO_PP_CAR_STATE_INITIAL:
+				{
+					Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_INITIAL;
+					break;
+				}
+				case ALGO_ROBO_PP_CAR_STATE_SPOT_DETECTION:
+				{
+					Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_SPOT_DETECTION;
+
+					Algo_Robo_Cm_MoveCarForward(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
+					break;
+				}
+				case ALGO_ROBO_PP_CAR_STATE_SPOT_CALC:
+				{
+					Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_SPOT_CALC;
+
+					Algo_Robo_Cm_MoveCarForward(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
+					break;
+				}
+				case ALGO_ROBO_PP_CAR_STATE_SPOT_DETECTED:
+				{
+					Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_SPOT_DETECTED;
+					break;
+				}
+				case ALGO_ROBO_PP_CAR_STATE_PARALLEL_PARK:
+				{
+					Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_PARALLEL_PARK;
+					break; }
+				}
+
+				Algo_Robo_Pp_LastCarState = ALGO_ROBO_PP_CAR_STATE_PENDING;
+			}
+		}
+		else
+		{
+			// Maximum PENDING time exceeded; car is put in DEFAULT state.
+			Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_DEFAULT;
+			Algo_Robo_Pp_CarTask = ALGO_ROBO_PP_CAR_TASK_DEFAULT;
+			Algo_Robo_Pp_LastCarState = ALGO_ROBO_PP_CAR_STATE_PENDING;
+		}
+
+		break;
+	}
+
+	default: break;
+	}
+}
+
+
+
+/* FUNCTION NAME: Algo_Robo_Pp_CalculateRotationTime
+ * RETURN TYPE: uint32
+ * PARAMETERS: uint16 dutycycle
+ * DESCRIPTION: Calculates the rotation time based on the car's running dutycycle.
+ * OBSERVATIONS: -
+ */
+uint32 Algo_Robo_Pp_CalculateRotationTime(uint16 dutycycle)
+{
+	uint32 rotationTime = 0;
+
+	switch(dutycycle)
+	{
+	case 40:
+	{
+		rotationTime = 31;
+		break;
+	}
+	case 45:
+	{
+		rotationTime = 28;
+		break;
+	}
+	case 50:
+	{
+		rotationTime = 25;
+		break;
+	}
+	case 60:
+	{
+		rotationTime = 25;
+		break;
+	}
+	case 70:
+	{
+		rotationTime = 25;
+		break;
+	}
+	default: break;
+	}
+	return rotationTime;
+}
+
+/** end of Functions implementation **/

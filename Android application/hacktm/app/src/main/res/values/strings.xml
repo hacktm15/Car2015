@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Proiect final</string>
+    <string name="prompt_path">ffrffrffrffr</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="bluetooth_receiver">00:06:66:6B:B0:95</string>
+</resources>

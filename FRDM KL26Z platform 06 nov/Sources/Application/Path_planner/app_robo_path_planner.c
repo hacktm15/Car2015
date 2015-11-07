@@ -44,9 +44,9 @@ uint8 Algo_Robo_Pp_LastCarMovement;
 uint16 Algo_Robo_Pp_CoveredDistanceCm;
 uint16 Algo_Robo_Pp_CarCurrentSpeedCmPerS;
 
-uint16 Algo_Robo_Pp_SpotLengthMm;
-uint16 Algo_Robo_Pp_MoveBackMm;
-uint16 Algo_Robo_Pp_MoveForwardMm;
+uint16 Algo_Robo_Pp_SpotLengthCm;
+uint16 Algo_Robo_Pp_MoveBackCm;
+uint16 Algo_Robo_Pp_MoveForwardCm;
 uint8 Algo_Robo_Pp_DistanceLastObstacleRightCm;
 
 uint32 Algo_Robo_Pp_TimerCarStopped;
@@ -105,9 +105,9 @@ void Algo_Robo_Pp_InitializePathPlanner(void)
 	Algo_Robo_Pp_CoveredDistanceCm = 0;
 	Algo_Robo_Pp_CarCurrentSpeedCmPerS = 0;
 
-	Algo_Robo_Pp_SpotLengthMm = 0;
-	Algo_Robo_Pp_MoveBackMm = 0;
-	Algo_Robo_Pp_MoveForwardMm = 0;
+	Algo_Robo_Pp_SpotLengthCm = 0;
+	Algo_Robo_Pp_MoveBackCm = 0;
+	Algo_Robo_Pp_MoveForwardCm = 0;
 	Algo_Robo_Pp_DistanceLastObstacleRightCm = 0;
 
 	Algo_Robo_Pp_TimerCarStopped = 0;
@@ -169,7 +169,7 @@ void Algo_Robo_Pp_ParallelParkingAlgorithm(void)
 	else
 	{
 		// Calculate the "trajectory" of the car to the free spot detected.
-		Algo_Robo_Pp_MoveBackMm = (Algo_Robo_Pp_SpotLengthMm / 2) - ALGO_ROBO_PP_SENSOR_PLACEMENT_ERROR_MM;
+		Algo_Robo_Pp_MoveBackCm = (Algo_Robo_Pp_SpotLengthCm / 2);
 
 		// No obstacle behind car; car moves backwards and is put in PARALLEL PARKING state.
 		Algo_Robo_Cm_MoveCarBackward(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
@@ -196,13 +196,14 @@ void Algo_Robo_Pp_CarDecisionParallelPark(void)
 		case ALGO_ROBO_PP_CAR_MOVING_BACKWARD:
 		{
 			// Car is rotated 90 deg to the right.
+			/* TODO FLUERAN: comunicatie cu telefonul => unghiul de rotire */
 			Algo_Robo_Pp_TimerCarRotateRight = Algo_Robo_Pp_CalculateRotationTime(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
 			Algo_Robo_Cm_RotateCarRight(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
 			break;
 		}
 		case ALGO_ROBO_PP_CAR_ROTATING_RIGHT:
 		{
-			if(Io_Sens_sensorRearDistanceCm < ALGO_ROBO_PP_FRONT_REAR_DIST_THOLD_CM)
+			if(Io_Sens_sensorFrontDistanceCm < ALGO_ROBO_PP_FRONT_REAR_DIST_THOLD_CM)
 			{
 				// Obstacle in front of car; car is put in PENDING state.
 
@@ -212,7 +213,7 @@ void Algo_Robo_Pp_CarDecisionParallelPark(void)
 			else
 			{
 				// Car moves forward.
-				Algo_Robo_Pp_MoveForwardMm = (uint16)((ALGO_ROBO_PP_CAR_WIDTH_MM / 2) + (uint16)(Algo_Robo_Pp_DistanceLastObstacleRightCm * 10) + ALGO_ROBO_PP_SENSOR_PLACEMENT_ERROR_MM);
+				Algo_Robo_Pp_MoveForwardCm = (uint16)((ALGO_ROBO_PP_CAR_WIDTH_CM / 2) + (uint16)(Algo_Robo_Pp_DistanceLastObstacleRightCm) + ALGO_ROBO_PP_SENSOR_PLACEMENT_ERROR_CM);
 				Algo_Robo_Cm_MoveCarForward(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
 			}
 			break;
@@ -220,6 +221,7 @@ void Algo_Robo_Pp_CarDecisionParallelPark(void)
 		case ALGO_ROBO_PP_CAR_MOVING_FORWARD:
 		{
 			// Car is rotated 90 deg to the left.
+			/* TODO FLUERAN: comunicatie cu telefonul => unghiul de rotire */
 			Algo_Robo_Pp_TimerCarRotateLeft = Algo_Robo_Pp_CalculateRotationTime(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
 			Algo_Robo_Cm_RotateCarLeft(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
 			break;
@@ -242,7 +244,7 @@ void Algo_Robo_Pp_CarDecisionParallelPark(void)
 		}
 		else
 		{
-			if(Algo_Robo_Pp_MoveBackMm == 0)
+			if(Algo_Robo_Pp_MoveBackCm == 0)
 			{
 				// Car has covered the backward distance needed; car is STOPPED.
 				Algo_Robo_Cm_StopCar();
@@ -259,6 +261,7 @@ void Algo_Robo_Pp_CarDecisionParallelPark(void)
 	}
 	case ALGO_ROBO_PP_CAR_ROTATING_RIGHT:
 	{
+		/* TODO FLUERAN: if angle is 90 deg. then stop */
 		if(Algo_Robo_Pp_TimerCarRotateRight == 0)
 		{
 			// Car has rotated with the angle needed; car is STOPPED.
@@ -285,7 +288,7 @@ void Algo_Robo_Pp_CarDecisionParallelPark(void)
 		}
 		else
 		{
-			if(Algo_Robo_Pp_MoveForwardMm == 0)
+			if(Algo_Robo_Pp_MoveForwardCm == 0)
 			{
 				// Car has covered the forward distance needed; car is STOPPED.
 				Algo_Robo_Cm_StopCar();
@@ -302,6 +305,7 @@ void Algo_Robo_Pp_CarDecisionParallelPark(void)
 	}
 	case ALGO_ROBO_PP_CAR_ROTATING_LEFT:
 	{
+		/* TODO FLUERAN: if angle is 90 deg. then stop */
 		if(Algo_Robo_Pp_TimerCarRotateLeft == 0)
 		{
 			// Car has rotated with the angle needed; car is STOPPED and put in CAR PARKED state.
@@ -350,7 +354,7 @@ void Algo_Robo_Pp_CarDecisionScheduler(void)
 	{
 		Algo_Robo_Pp_TimerSpotCalcState++;
 		// Add the distance covered in 200ms to the calculated spot length.
-		Algo_Robo_Pp_SpotLengthMm = Algo_Robo_Pp_SpotLengthMm + (Algo_Robo_Pp_CarCurrentSpeedCmPerS / ALGO_ROBO_SC_TASK_DIVIDER);
+		Algo_Robo_Pp_SpotLengthCm = Algo_Robo_Pp_SpotLengthCm + Algo_Robo_Pp_CoveredDistanceCm;
 
 		break;
 	}
@@ -373,13 +377,13 @@ void Algo_Robo_Pp_CarDecisionScheduler(void)
 		case ALGO_ROBO_PP_CAR_MOVING_BACKWARD:
 		{
 			Algo_Robo_Pp_TimerCarMoveBackward++;
-			if(Algo_Robo_Pp_MoveBackMm < (uint16)(Algo_Robo_Pp_MoveBackMm - (Algo_Robo_Pp_CarCurrentSpeedCmPerS / ALGO_ROBO_SC_TASK_DIVIDER)))
+			if(Algo_Robo_Pp_MoveBackCm < (uint16)(Algo_Robo_Pp_MoveBackCm - Algo_Robo_Pp_CoveredDistanceCm))
 			{
-				Algo_Robo_Pp_MoveBackMm = 0;
+				Algo_Robo_Pp_MoveBackCm = 0;
 			}
 			else
 			{
-				Algo_Robo_Pp_MoveBackMm = Algo_Robo_Pp_MoveBackMm - (Algo_Robo_Pp_CarCurrentSpeedCmPerS / ALGO_ROBO_SC_TASK_DIVIDER);
+				Algo_Robo_Pp_MoveBackCm = Algo_Robo_Pp_MoveBackCm - Algo_Robo_Pp_CoveredDistanceCm;
 			}
 			break;
 		}
@@ -398,13 +402,13 @@ void Algo_Robo_Pp_CarDecisionScheduler(void)
 		case ALGO_ROBO_PP_CAR_MOVING_FORWARD:
 		{
 			Algo_Robo_Pp_TimerCarMoveForward++;
-			if(Algo_Robo_Pp_MoveForwardMm < (uint16)(Algo_Robo_Pp_MoveForwardMm - (Algo_Robo_Pp_CarCurrentSpeedCmPerS / ALGO_ROBO_SC_TASK_DIVIDER)))
+			if(Algo_Robo_Pp_MoveForwardCm < (uint16)(Algo_Robo_Pp_MoveForwardCm - Algo_Robo_Pp_CoveredDistanceCm))
 			{
-				Algo_Robo_Pp_MoveForwardMm = 0;
+				Algo_Robo_Pp_MoveForwardCm = 0;
 			}
 			else
 			{
-				Algo_Robo_Pp_MoveForwardMm = Algo_Robo_Pp_MoveForwardMm - (Algo_Robo_Pp_CarCurrentSpeedCmPerS / ALGO_ROBO_SC_TASK_DIVIDER);
+				Algo_Robo_Pp_MoveForwardCm = Algo_Robo_Pp_MoveForwardCm - Algo_Robo_Pp_CoveredDistanceCm;
 			}
 			break;
 		}
@@ -508,7 +512,7 @@ void Algo_Robo_Pp_DetermineNextCarState(void)
 				// Free spot detected to the right; car is put in SPOT CALCULATION state.
 				Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_SPOT_CALC;
 				Algo_Robo_Pp_TimerSpotCalcState = 0;
-				Algo_Robo_Pp_SpotLengthMm = 0;
+				Algo_Robo_Pp_SpotLengthCm = 0;
 			}
 			else
 			{
@@ -540,7 +544,7 @@ void Algo_Robo_Pp_DetermineNextCarState(void)
 		{
 			// No obstacle in front of car; car CAN MOVE forward.
 		}
-		if(Algo_Robo_Pp_SpotLengthMm > ALGO_ROBO_PP_CAR_LENGTH_MM)
+		if(Algo_Robo_Pp_SpotLengthCm > ALGO_ROBO_PP_CAR_LENGTH_MM)
 		{
 			// Spot is LONG ENOUGH.
 			if(Algo_Robo_Pp_CarMovement != ALGO_ROBO_PP_CAR_STOPPED)
@@ -623,7 +627,6 @@ void Algo_Robo_Pp_DetermineNextCarState(void)
 				case ALGO_ROBO_PP_CAR_STATE_DEFAULT:
 				{
 					Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_DEFAULT;
-					/* TODO FLUERAN: see whether to restart algorithm or not. */
 					Algo_Robo_Pp_StartParallelParking();
 					break;
 				}
@@ -674,6 +677,8 @@ void Algo_Robo_Pp_DetermineNextCarState(void)
 	default: break;
 	}
 }
+
+
 
 /* FUNCTION NAME: Algo_Robo_Pp_CalculateRotationTime
  * RETURN TYPE: uint32

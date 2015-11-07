@@ -70,7 +70,7 @@ void Algo_Robo_Dc_CalculateCarDistanceCovered(void)
 	Algo_Robo_Dc_CalculateSideDistanceCovered(&Algo_Robo_Sc_LeftEncoder);
 	Algo_Robo_Dc_CalculateSideDistanceCovered(&Algo_Robo_Sc_RightEncoder);
 
-	Algo_Robo_Pp_CoveredDistanceCm = (Algo_Robo_Sc_LeftEncoder->DistanceCm + Algo_Robo_Sc_RightEncoder->DistanceCm) / 2;
+	Algo_Robo_Pp_CoveredDistanceCm = (Algo_Robo_Sc_LeftEncoder.DistanceCm + Algo_Robo_Sc_RightEncoder.DistanceCm) / 2;
 }
 
 
