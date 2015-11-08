@@ -121,7 +121,7 @@ void Io_Sens_Initialization(void)
 void Io_Sens_Usonic_TriggerPulse(uint16 PortPin, uint32 channel, uint16 *sampleVector)
 {
 	uint32 Measurement = 0;
-	uint8 i, aux = 0;
+	uint8 i = 0;
 
 	i = ((channel & 0x00000F00) >> 8) - 1;
 

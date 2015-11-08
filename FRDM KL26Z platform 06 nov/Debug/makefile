@@ -27,6 +27,7 @@ RM := rm -rf
 -include Sources/HW_drivers/H-bridge/ti8833/subdir.mk
 -include Sources/Application/Speed_calc/subdir.mk
 -include Sources/Application/Path_planner/subdir.mk
+-include Sources/Application/Obstacle_avoidance/subdir.mk
 -include Sources/Application/Distance_calc/subdir.mk
 -include Sources/Application/Car_movement/subdir.mk
 -include Sources/Application/Bluetooth/subdir.mk

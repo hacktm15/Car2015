@@ -1,0 +1,327 @@
+/**************************************************************************
+
+COPYRIGHT (C) $Date: Sept 1, 2015 $
+$CompanyInfo: CONTINENTAL AUTOMOTIVE GMBH $
+ALL RIGHTS RESERVED.
+
+The reproduction, transmission or use of this document or its contents is
+not permitted without express written authority.
+Offenders will be liable for damages. All rights, including rights created
+by patent grant or registration of a utility model or design, are reserved.
+---------------------------------------------------------------------------
+
+$ProjectName: FRDM KL26-Z PLATFORM $
+
+$Log: io_bluetooth.c $
+
+$Author: Iovescu Raul $
+
+ ****************************************************************************/
+
+/* NOTE: This Bluetooth driver is application specific (Autonomous car 2015) since each state is related to the
+ *       Android application buttons & commands used for communication and control between Car and Smartphone.
+ */
+
+#include "MCU_drivers/Asy/io_asy.h"
+#include "MCU_drivers/Pcs/io_pcs_cnf.h"
+#include "MCU_drivers/Dio/io_dio.h"
+
+#include "HW_drivers/Sensors/Proximity/io_sens_ir.h"
+
+#include "Application/Bluetooth/io_bluetooth.h"
+#include "Application/Car_movement/app_robo_car_movement.h"
+#include "Application/Distance_calc/app_robo_dist_calc.h"
+#include "Application/Speed_calc/app_robo_speed_calc.h"
+#include "Application/Path_planner/app_robo_path_planner.h"
+
+#include "io_bluetooth.h"
+
+int state=SLEEP_CAR;
+int dutycycle=0;
+int wait=0;
+int delaysend=0;
+char sensor;
+
+char mask(char mod,uint8 value)
+{
+	if(mod=='F')
+	{
+		sensor|=0x20;
+		sensor|=value;
+	}
+	if(mod=='B')
+	{
+		sensor|=0x40;
+		sensor|=value;
+	}
+	if(mod=='L')
+	{
+		sensor|=0x60;
+		sensor|=value;
+	}
+	if(mod=='R')
+	{
+		sensor|=0x80;
+		sensor|=value;
+	}
+
+	if(mod=='D')
+	{
+		sensor|=0xC0;
+		sensor|=value;
+	}
+	return sensor;
+}
+
+void Io_Bluetooth_State()
+{
+
+	switch(state)
+	{
+
+	/* Wait for 2,5 seconds for the system to start up*/
+	case SLEEP_CAR:
+	{
+		if(wait<50)
+			wait++;
+		if(wait==50)
+		{
+			wait=0;
+			state=WAIT;
+		}
+		break;
+	}
+	case RECEIVE:
+	{
+		if(Algo_Robo_Pp_CarState==ALGO_ROBO_PP_CAR_STATE_CAR_PARKED)
+			state=WAIT;
+
+		if(delaysend==0)
+		{
+			sensor=mask('F',Io_Sens_sensorFrontDistanceCm);
+			Io_Asy_TxData(0,1,&sensor);
+			Io_Asy_Start(0);
+			sensor=0;
+		}
+		if(delaysend==1)
+		{
+			sensor=mask('B',Io_Sens_sensorRearDistanceCm);
+			Io_Asy_TxData(0,1,&sensor);
+			Io_Asy_Start(0);
+			sensor=0;
+
+		}
+		if(delaysend==2)
+		{
+			sensor=mask('L',Io_Sens_sensorLeftDistanceCm);
+			Io_Asy_TxData(0,1,&sensor);
+			Io_Asy_Start(0);
+			sensor=0;
+		}
+		if(delaysend==3)
+		{
+			sensor=mask('R',Io_Sens_sensorRightDistanceCm);
+			Io_Asy_TxData(0,1,&sensor);
+			Io_Asy_Start(0);
+			sensor=0;
+		}
+		if(delaysend==4)
+		{
+			if(dutycycle<0)
+			{
+				sensor=mask('D',-dutycycle/10);
+			}
+			else
+			{
+				sensor=mask('D',dutycycle/10);
+			}
+			Io_Asy_TxData(0,1,&sensor);
+			Io_Asy_Start(0);
+			sensor=0;
+		}
+		delaysend++;
+		if(delaysend==5)
+			delaysend=0;
+
+		switch(reception[0])
+		{
+		case '8':
+			// go forward
+			state=FW;
+			break;
+		case '2':
+			// go backward
+			state=BW;
+			break;
+		case '4':
+			// rotate left
+			state=LEFT;
+			break;
+		case '6':
+			// rotate right
+			state=RIGHT;
+			break;
+		case '5':
+			// stop car
+			state=WAIT;
+			break;
+		case '9':
+			// parallel parking
+			state=PARK;
+			break;
+		case '+':
+			// increase speed
+			state=PLUS;
+			break;
+		case '-':
+			// decrease speed
+			state=MINUS;
+			break;
+		default:
+			break;
+		}
+		reception[0]='0';
+		break;
+	}
+	case WAIT:
+	{
+		Io_Dio_SetPinLevel(SET_LED_GREEN, LED_ON);
+		Io_Dio_SetPinLevel(SET_LED_BLUE, LED_OFF);
+		Io_Dio_SetPinLevel(SET_LED_RED, LED_ON);
+		Algo_Robo_Cm_StopCar();
+		Algo_Robo_Pp_InitializePathPlanner();
+		dutycycle = 0;
+		state=RECEIVE;
+		break;
+	}
+	case FW:
+	{
+		if(Io_Sens_sensorFrontDistanceCm>13)
+		{
+			Io_Dio_SetPinLevel(SET_LED_GREEN, LED_ON);
+			Io_Dio_SetPinLevel(SET_LED_BLUE, LED_OFF);
+			Io_Dio_SetPinLevel(SET_LED_RED, LED_OFF);
+			dutycycle=50;
+			Algo_Robo_Cm_MoveCarForward(dutycycle);
+
+		}
+		else
+		{
+			Io_Dio_SetPinLevel(SET_LED_GREEN, LED_OFF);
+			Io_Dio_SetPinLevel(SET_LED_BLUE, LED_OFF);
+			Io_Dio_SetPinLevel(SET_LED_RED, LED_ON);
+			Algo_Robo_Cm_StopCar();
+		}
+		state=RECEIVE;
+		break;
+	}
+	case BW:
+	{
+		if(Io_Sens_sensorRearDistanceCm>13)
+		{
+			Io_Dio_SetPinLevel(SET_LED_GREEN, LED_ON);
+			Io_Dio_SetPinLevel(SET_LED_BLUE, LED_OFF);
+			Io_Dio_SetPinLevel(SET_LED_RED, LED_OFF);
+			dutycycle=50;
+			Algo_Robo_Cm_MoveCarBackward(dutycycle);
+		}
+		else
+		{
+			Io_Dio_SetPinLevel(SET_LED_GREEN, LED_OFF);
+			Io_Dio_SetPinLevel(SET_LED_BLUE, LED_OFF);
+			Io_Dio_SetPinLevel(SET_LED_RED, LED_ON);
+			Algo_Robo_Cm_StopCar();
+		}
+		state=RECEIVE;
+		break;
+	}
+	case PARK:
+	{
+		Io_Dio_SetPinLevel(SET_LED_GREEN, LED_OFF);
+		Io_Dio_SetPinLevel(SET_LED_BLUE, LED_ON);
+		Io_Dio_SetPinLevel(SET_LED_RED, LED_OFF);
+		Algo_Robo_Pp_StartParallelParking();
+		dutycycle=0;
+		state=RECEIVE;
+		break;
+	}
+	case OBSTACLE:
+	{
+		Io_Dio_SetPinLevel(SET_LED_GREEN, LED_OFF);
+		Io_Dio_SetPinLevel(SET_LED_BLUE, LED_ON);
+		Io_Dio_SetPinLevel(SET_LED_RED, LED_ON);
+		state=RECEIVE;
+		dutycycle=0;
+		break;
+	}
+	case LEFT:
+	{
+		Io_Dio_SetPinLevel(SET_LED_GREEN, LED_ON);
+		Io_Dio_SetPinLevel(SET_LED_BLUE, LED_ON);
+		Io_Dio_SetPinLevel(SET_LED_RED, LED_OFF);
+		dutycycle=50;
+		Algo_Robo_Cm_RotateCarLeft(dutycycle);
+		state=RECEIVE;
+		break;
+	}
+	case RIGHT:
+	{
+		Io_Dio_SetPinLevel(SET_LED_GREEN, LED_ON);
+		Io_Dio_SetPinLevel(SET_LED_BLUE, LED_ON);
+		Io_Dio_SetPinLevel(SET_LED_RED, LED_OFF);
+		dutycycle=50;
+		Algo_Robo_Cm_RotateCarRight(dutycycle);
+		state=RECEIVE;
+		break;
+	}
+	case PLUS:
+	{
+		dutycycle+=10;
+		if(dutycycle >= 70)
+		{
+			dutycycle = 70;
+		}
+		else {}
+
+		Io_Dio_SetPinLevel(SET_LED_GREEN, LED_OFF);
+		Io_Dio_SetPinLevel(SET_LED_BLUE, LED_ON);
+		Io_Dio_SetPinLevel(SET_LED_RED, LED_ON);
+		state=RECEIVE;
+		if(dutycycle > 0)
+		{
+			Algo_Robo_Cm_MoveCarForward(dutycycle);
+		}
+		else if(dutycycle==0)
+		{
+			Algo_Robo_Cm_StopCar();
+			state=WAIT;
+		}
+		else if(dutycycle < 0)
+			Algo_Robo_Cm_MoveCarBackward((uint16)-dutycycle);
+
+		break;
+	}
+	case MINUS:
+	{
+		dutycycle-=10;
+		if(dutycycle <= -70)
+			dutycycle = -70;
+		Io_Dio_SetPinLevel(SET_LED_GREEN, LED_OFF);
+		Io_Dio_SetPinLevel(SET_LED_BLUE, LED_ON);
+		Io_Dio_SetPinLevel(SET_LED_RED, LED_ON);
+		state=RECEIVE;
+
+		if(dutycycle > 0)
+			Algo_Robo_Cm_MoveCarForward(dutycycle);
+		else if(dutycycle==0)
+		{
+			Algo_Robo_Cm_StopCar();
+			state=WAIT;
+		}
+		else if(dutycycle<0)
+			Algo_Robo_Cm_MoveCarBackward(-dutycycle);
+		break;
+	}
+	default: break;
+	}
+}

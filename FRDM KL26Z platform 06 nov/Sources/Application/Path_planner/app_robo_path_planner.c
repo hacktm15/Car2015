@@ -64,6 +64,11 @@ uint32 Algo_Robo_Pp_TimerSpotDetectedState;
 uint32 Algo_Robo_Pp_TimerParallelParkState;
 uint32 Algo_Robo_Pp_TimerCarParkedState;
 
+uint8 App_Robo_RotationLeftFeedback;
+uint8 App_Robo_RotationRightFeedback;
+uint8 App_Robo_RotationLeftSend;
+uint8 App_Robo_RotationRightSend;
+
 uint8 Algo_Robo_Pp_ParallelParkFlag;
 
 /** end of Global variables and constants **/
@@ -124,6 +129,11 @@ void Algo_Robo_Pp_InitializePathPlanner(void)
 	Algo_Robo_Pp_TimerSpotDetectedState = 0;
 	Algo_Robo_Pp_TimerParallelParkState = 0;
 	Algo_Robo_Pp_TimerCarParkedState = 0;
+
+	App_Robo_RotationLeftFeedback = FALSE;
+	App_Robo_RotationRightFeedback = FALSE;
+	App_Robo_RotationLeftSend = FALSE;
+	App_Robo_RotationRightSend = FALSE;
 
 	Algo_Robo_Pp_ParallelParkFlag = TRUE;
 }
@@ -197,7 +207,8 @@ void Algo_Robo_Pp_CarDecisionParallelPark(void)
 		{
 			// Car is rotated 90 deg to the right.
 			/* TODO FLUERAN: comunicatie cu telefonul => unghiul de rotire */
-			Algo_Robo_Pp_TimerCarRotateRight = Algo_Robo_Pp_CalculateRotationTime(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
+			App_Robo_RotationLeftSend = TRUE;
+			//Algo_Robo_Pp_TimerCarRotateRight = Algo_Robo_Pp_CalculateRotationTime(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
 			Algo_Robo_Cm_RotateCarRight(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
 			break;
 		}
@@ -222,7 +233,8 @@ void Algo_Robo_Pp_CarDecisionParallelPark(void)
 		{
 			// Car is rotated 90 deg to the left.
 			/* TODO FLUERAN: comunicatie cu telefonul => unghiul de rotire */
-			Algo_Robo_Pp_TimerCarRotateLeft = Algo_Robo_Pp_CalculateRotationTime(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
+			App_Robo_RotationRightSend = TRUE;
+			//Algo_Robo_Pp_TimerCarRotateLeft = Algo_Robo_Pp_CalculateRotationTime(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
 			Algo_Robo_Cm_RotateCarLeft(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
 			break;
 		}

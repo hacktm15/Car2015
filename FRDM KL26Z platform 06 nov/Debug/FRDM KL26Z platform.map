@@ -94,9 +94,13 @@ Io_Sens_USONIC_sensorSamplesVectorRight
                     0x6               ./Sources/HW_drivers/Sensors/Proximity/io_sens_ir.o
 Io_Sens_sensorLeftDistanceCm
                     0x1               ./Sources/HW_drivers/Sensors/Proximity/io_sens_ir.o
+Algo_Robo_Oa_TimerCarMoveForward
+                    0x4               ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
 Io_Sens_sensorSamplesVectorFront
                     0x14              ./Sources/HW_drivers/Sensors/Proximity/io_sens_ir.o
 stop_flag           0x4               ./Sources/HW_drivers/Stepper_motor/io_smc.o
+App_Robo_RotationRightSend
+                    0x1               ./Sources/Application/Path_planner/app_robo_path_planner.o
 Algo_Robo_Pp_TimerCarRotateLeft
                     0x4               ./Sources/Application/Path_planner/app_robo_path_planner.o
 Io_Sch_OsCounter    0xe               ./Sources/System/Scheduler/io_sch.o
@@ -112,6 +116,8 @@ Io_Sens_sensorRightDistanceMm
                     0x2               ./Sources/HW_drivers/Sensors/Proximity/io_sens_ir.o
 Io_Sens_sensorSamplesVectorLeft
                     0x14              ./Sources/HW_drivers/Sensors/Proximity/io_sens_ir.o
+Algo_Robo_Oa_TimerCarRotateRight
+                    0x4               ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
 hbr_drv8833_config  0x4               ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_ti8833.o
 Algo_Robo_Sc_LeftEncoder
                     0xc               ./Sources/Application/Speed_calc/app_robo_speed_calc.o
@@ -128,6 +134,8 @@ Algo_Robo_Pp_MoveForwardCm
 io_asy_config_device_int
                     0x4               ./Sources/MCU_drivers/Asy/io_asy.o
 Io_Int_CnfPtr       0x4               ./Sources/MCU_drivers/Int/io_int.o
+App_Robo_RotationLeftSend
+                    0x1               ./Sources/Application/Path_planner/app_robo_path_planner.o
 Io_Sens_sensorSamplesVectorRear
                     0x14              ./Sources/HW_drivers/Sensors/Proximity/io_sens_ir.o
 io_smc_drive_mode   0x4               ./Sources/HW_drivers/Stepper_motor/io_smc.o
@@ -144,6 +152,8 @@ Io_Sens_USONIC_sensorFrontDistanceCm
                     0x1               ./Sources/HW_drivers/Sensors/Proximity/io_sens_ir.o
 Io_Os_PeriodicQueueDepth
                     0x4               ./Sources/System/Os/io_os.o
+Algo_Robo_Oa_TimerCarRotateLeft
+                    0x4               ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
 smc_last_step       0x4               ./Sources/HW_drivers/Stepper_motor/io_smc.o
 Algo_Robo_Pp_MoveBackCm
                     0x2               ./Sources/Application/Path_planner/app_robo_path_planner.o
@@ -152,6 +162,8 @@ Io_Adc_Data_var     0x16              ./Sources/MCU_drivers/Adc/io_adc.o
 error_log           0x4               ./Sources/MCU_drivers/I2c/io_i2c.o
 Algo_Robo_Pp_TimerParallelParkState
                     0x4               ./Sources/Application/Path_planner/app_robo_path_planner.o
+App_Robo_RotationLeftFeedback
+                    0x1               ./Sources/Application/Path_planner/app_robo_path_planner.o
 Io_Asy_ch_info_ptr_int
                     0x4               ./Sources/MCU_drivers/Asy/io_asy.o
 c                   0x1               ./Sources/MCU_drivers/Asy/io_asy.o
@@ -167,6 +179,8 @@ Algo_Robo_Cm_TimerRotateLeft
                     0x4               ./Sources/Application/Car_movement/app_robo_car_movement.o
 Algo_Robo_Pp_CarMovement
                     0x1               ./Sources/Application/Path_planner/app_robo_path_planner.o
+Algo_Robo_Oa_TimerCarStopped
+                    0x4               ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
 io_smc_dir          0x4               ./Sources/HW_drivers/Stepper_motor/io_smc.o
 array_of_handlers   0xc0              ./Sources/MCU_drivers/Int/io_int.o
 io_smc_step_nr      0x4               ./Sources/HW_drivers/Stepper_motor/io_smc.o
@@ -192,6 +206,8 @@ Io_Sens_sensorLeftDistanceMm
                     0x2               ./Sources/HW_drivers/Sensors/Proximity/io_sens_ir.o
 Io_Sch_TaskCounter10ms
                     0x4               ./Sources/System/Scheduler/io_sch_cnf.o
+App_Robo_RotationRightFeedback
+                    0x1               ./Sources/Application/Path_planner/app_robo_path_planner.o
 Algo_Robo_Pp_LastCarState
                     0x1               ./Sources/Application/Path_planner/app_robo_path_planner.o
 io_smc_step_count   0x4               ./Sources/HW_drivers/Stepper_motor/io_smc.o
@@ -234,6 +250,8 @@ Io_Os_PeriodicQueue
                     0x258             ./Sources/System/Os/io_os.o
 Io_Adc_ConfigPtr    0x4               ./Sources/MCU_drivers/Adc/io_adc.o
 Io_Tpm_Initialized  0x1               ./Sources/MCU_drivers/Tpm/io_tpm.o
+Algo_Robo_Oa_TimerCarMoveBackward
+                    0x4               ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
 Io_Sens_sensorFrontDistanceCm
                     0x1               ./Sources/HW_drivers/Sensors/Proximity/io_sens_ir.o
 Io_Sch_TaskCounter0ms
@@ -1914,6 +1932,72 @@ Discarded input sections
  .debug_macro   0x00000000       0x10 ./Sources/Application/Path_planner/app_robo_path_planner.o
  .debug_macro   0x00000000       0x1c ./Sources/Application/Path_planner/app_robo_path_planner.o
  .debug_macro   0x00000000       0xca ./Sources/Application/Path_planner/app_robo_path_planner.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .group         0x00000000        0x8 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .text          0x00000000        0x0 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .data          0x00000000        0x0 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .bss           0x00000000        0x0 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .text.Algo_Robo_Pp_InitializeObstAvoid
+                0x00000000       0x3c ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .text.Algo_Robo_ObstAvoidManager
+                0x00000000      0x148 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .rodata.Algo_Robo_ObstAvoidManager
+                0x00000000       0x28 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_info    0x00000000      0x1b7 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_abbrev  0x00000000       0x8c ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_aranges
+                0x00000000       0x28 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_ranges  0x00000000       0x18 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000      0x150 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000      0x802 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000       0x16 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000       0x16 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000       0x44 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000      0x209 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000       0x3a ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000       0x3a ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000       0x1f ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000      0x250 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000       0xd1 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000     0x5e22 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000       0x58 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000       0x52 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000       0x3a ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000       0x82 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000       0x2e ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000       0x6a ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000       0x4c ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000       0x10 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000       0x1c ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000       0xca ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_macro   0x00000000       0x10 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_line    0x00000000      0x4b1 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_str     0x00000000    0x21bb2 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .comment       0x00000000       0x71 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .ARM.attributes
+                0x00000000       0x32 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ .debug_frame   0x00000000       0x48 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
+ COMMON         0x00000000       0x14 ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
  .group         0x00000000        0x8 ./Sources/Application/Distance_calc/app_robo_dist_calc.o
  .group         0x00000000        0x8 ./Sources/Application/Distance_calc/app_robo_dist_calc.o
  .group         0x00000000        0x8 ./Sources/Application/Distance_calc/app_robo_dist_calc.o
@@ -2333,6 +2417,7 @@ LOAD ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_cnf_ti8833.o
 LOAD ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_ti8833.o
 LOAD ./Sources/Application/Speed_calc/app_robo_speed_calc.o
 LOAD ./Sources/Application/Path_planner/app_robo_path_planner.o
+LOAD ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o
 LOAD ./Sources/Application/Distance_calc/app_robo_dist_calc.o
 LOAD ./Sources/Application/Car_movement/app_robo_car_movement.o
 LOAD ./Sources/Application/Bluetooth/io_bluetooth.o
@@ -2375,7 +2460,7 @@ LOAD d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4
  .FlashConfig   0x00000400       0x10 ./Project_Settings/Startup_Code/startup_MKL26Z4.o
                 0x00000410                . = ALIGN (0x4)
 
-.text           0x00000410     0x6238
+.text           0x00000410     0x634c
                 0x00000410                . = ALIGN (0x4)
  *(.text)
  .text          0x00000410       0x60 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crtbegin.o
@@ -2729,268 +2814,268 @@ LOAD d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4
                 0x00004bb4       0x34 ./Sources/Application/Speed_calc/app_robo_speed_calc.o
                 0x00004bb4                Algo_Robo_Sc_InitializeSpeedCalc
  .text.Algo_Robo_Pp_InitializePathPlanner
-                0x00004be8      0x104 ./Sources/Application/Path_planner/app_robo_path_planner.o
+                0x00004be8      0x12c ./Sources/Application/Path_planner/app_robo_path_planner.o
                 0x00004be8                Algo_Robo_Pp_InitializePathPlanner
  .text.Algo_Robo_Pp_StartParallelParking
-                0x00004cec       0x4c ./Sources/Application/Path_planner/app_robo_path_planner.o
-                0x00004cec                Algo_Robo_Pp_StartParallelParking
+                0x00004d14       0x4c ./Sources/Application/Path_planner/app_robo_path_planner.o
+                0x00004d14                Algo_Robo_Pp_StartParallelParking
  .text.Algo_Robo_Pp_ParallelParkingAlgorithm
-                0x00004d38       0x54 ./Sources/Application/Path_planner/app_robo_path_planner.o
-                0x00004d38                Algo_Robo_Pp_ParallelParkingAlgorithm
+                0x00004d60       0x54 ./Sources/Application/Path_planner/app_robo_path_planner.o
+                0x00004d60                Algo_Robo_Pp_ParallelParkingAlgorithm
  .text.Algo_Robo_Pp_CarDecisionParallelPark
-                0x00004d8c      0x148 ./Sources/Application/Path_planner/app_robo_path_planner.o
-                0x00004d8c                Algo_Robo_Pp_CarDecisionParallelPark
+                0x00004db4      0x148 ./Sources/Application/Path_planner/app_robo_path_planner.o
+                0x00004db4                Algo_Robo_Pp_CarDecisionParallelPark
  .text.Algo_Robo_Pp_CarDecisionScheduler
-                0x00004ed4      0x1ac ./Sources/Application/Path_planner/app_robo_path_planner.o
-                0x00004ed4                Algo_Robo_Pp_CarDecisionScheduler
+                0x00004efc      0x1ac ./Sources/Application/Path_planner/app_robo_path_planner.o
+                0x00004efc                Algo_Robo_Pp_CarDecisionScheduler
  .text.Algo_Robo_Pp_DetermineNextCarState
-                0x00005080      0x200 ./Sources/Application/Path_planner/app_robo_path_planner.o
-                0x00005080                Algo_Robo_Pp_DetermineNextCarState
+                0x000050a8      0x200 ./Sources/Application/Path_planner/app_robo_path_planner.o
+                0x000050a8                Algo_Robo_Pp_DetermineNextCarState
  .text.Algo_Robo_Pp_CalculateRotationTime
-                0x00005280       0x54 ./Sources/Application/Path_planner/app_robo_path_planner.o
-                0x00005280                Algo_Robo_Pp_CalculateRotationTime
+                0x000052a8       0x54 ./Sources/Application/Path_planner/app_robo_path_planner.o
+                0x000052a8                Algo_Robo_Pp_CalculateRotationTime
  .text.Algo_Robo_Dc_CalculateSideDistanceCovered
-                0x000052d4       0x50 ./Sources/Application/Distance_calc/app_robo_dist_calc.o
-                0x000052d4                Algo_Robo_Dc_CalculateSideDistanceCovered
+                0x000052fc       0x50 ./Sources/Application/Distance_calc/app_robo_dist_calc.o
+                0x000052fc                Algo_Robo_Dc_CalculateSideDistanceCovered
  .text.Algo_Robo_Dc_CalculateCarDistanceCovered
-                0x00005324       0x38 ./Sources/Application/Distance_calc/app_robo_dist_calc.o
-                0x00005324                Algo_Robo_Dc_CalculateCarDistanceCovered
+                0x0000534c       0x38 ./Sources/Application/Distance_calc/app_robo_dist_calc.o
+                0x0000534c                Algo_Robo_Dc_CalculateCarDistanceCovered
  .text.Algo_Dc_GetAllSensorsSample
-                0x0000535c       0x40 ./Sources/Application/Distance_calc/app_robo_dist_calc.o
-                0x0000535c                Algo_Dc_GetAllSensorsSample
+                0x00005384       0x40 ./Sources/Application/Distance_calc/app_robo_dist_calc.o
+                0x00005384                Algo_Dc_GetAllSensorsSample
  .text.Algo_Dc_CalculateSensorsDistances
-                0x0000539c       0xc4 ./Sources/Application/Distance_calc/app_robo_dist_calc.o
-                0x0000539c                Algo_Dc_CalculateSensorsDistances
+                0x000053c4       0xc4 ./Sources/Application/Distance_calc/app_robo_dist_calc.o
+                0x000053c4                Algo_Dc_CalculateSensorsDistances
  .text.Algo_Robo_Cm_InitializeCarMovement
-                0x00005460       0x30 ./Sources/Application/Car_movement/app_robo_car_movement.o
-                0x00005460                Algo_Robo_Cm_InitializeCarMovement
+                0x00005488       0x30 ./Sources/Application/Car_movement/app_robo_car_movement.o
+                0x00005488                Algo_Robo_Cm_InitializeCarMovement
  .text.Algo_Robo_Cm_UpdateCarSpeed
-                0x00005490       0x58 ./Sources/Application/Car_movement/app_robo_car_movement.o
-                0x00005490                Algo_Robo_Cm_UpdateCarSpeed
+                0x000054b8       0x58 ./Sources/Application/Car_movement/app_robo_car_movement.o
+                0x000054b8                Algo_Robo_Cm_UpdateCarSpeed
  .text.Algo_Robo_Cm_MoveCarForward
-                0x000054e8       0x38 ./Sources/Application/Car_movement/app_robo_car_movement.o
-                0x000054e8                Algo_Robo_Cm_MoveCarForward
+                0x00005510       0x38 ./Sources/Application/Car_movement/app_robo_car_movement.o
+                0x00005510                Algo_Robo_Cm_MoveCarForward
  .text.Algo_Robo_Cm_MoveCarBackward
-                0x00005520       0x38 ./Sources/Application/Car_movement/app_robo_car_movement.o
-                0x00005520                Algo_Robo_Cm_MoveCarBackward
+                0x00005548       0x38 ./Sources/Application/Car_movement/app_robo_car_movement.o
+                0x00005548                Algo_Robo_Cm_MoveCarBackward
  .text.Algo_Robo_Cm_RotateCarLeft
-                0x00005558       0x64 ./Sources/Application/Car_movement/app_robo_car_movement.o
-                0x00005558                Algo_Robo_Cm_RotateCarLeft
+                0x00005580       0x64 ./Sources/Application/Car_movement/app_robo_car_movement.o
+                0x00005580                Algo_Robo_Cm_RotateCarLeft
  .text.Algo_Robo_Cm_RotateCarRight
-                0x000055bc       0x64 ./Sources/Application/Car_movement/app_robo_car_movement.o
-                0x000055bc                Algo_Robo_Cm_RotateCarRight
+                0x000055e4       0x64 ./Sources/Application/Car_movement/app_robo_car_movement.o
+                0x000055e4                Algo_Robo_Cm_RotateCarRight
  .text.Algo_Robo_Cm_StopCar
-                0x00005620       0x24 ./Sources/Application/Car_movement/app_robo_car_movement.o
-                0x00005620                Algo_Robo_Cm_StopCar
+                0x00005648       0x24 ./Sources/Application/Car_movement/app_robo_car_movement.o
+                0x00005648                Algo_Robo_Cm_StopCar
  .text.Algo_Robo_Cm_LimitDutycycle
-                0x00005644       0x4c ./Sources/Application/Car_movement/app_robo_car_movement.o
- .text.mask     0x00005690       0xf0 ./Sources/Application/Bluetooth/io_bluetooth.o
-                0x00005690                mask
+                0x0000566c       0x4c ./Sources/Application/Car_movement/app_robo_car_movement.o
+ .text.mask     0x000056b8       0xf0 ./Sources/Application/Bluetooth/io_bluetooth.o
+                0x000056b8                mask
  .text.Io_Bluetooth_State
-                0x00005780      0x548 ./Sources/Application/Bluetooth/io_bluetooth.o
-                0x00005780                Io_Bluetooth_State
- .text.main     0x00005cc8       0x84 ./Sources/main.o
-                0x00005cc8                main
+                0x000057a8      0x5d0 ./Sources/Application/Bluetooth/io_bluetooth.o
+                0x000057a8                Io_Bluetooth_State
+ .text.main     0x00005d78       0x84 ./Sources/main.o
+                0x00005d78                main
  .text.SystemInit
-                0x00005d4c      0x1b0 ./Project_Settings/Startup_Code/system_MKL26Z4.o
-                0x00005d4c                SystemInit
- .text.calloc   0x00005efc       0x18 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-calloc.o)
-                0x00005efc                calloc
- .text.exit     0x00005f14       0x2c d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-exit.o)
-                0x00005f14                exit
+                0x00005dfc      0x1b0 ./Project_Settings/Startup_Code/system_MKL26Z4.o
+                0x00005dfc                SystemInit
+ .text.calloc   0x00005fac       0x18 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-calloc.o)
+                0x00005fac                calloc
+ .text.exit     0x00005fc4       0x2c d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-exit.o)
+                0x00005fc4                exit
  .text.__libc_init_array
-                0x00005f40       0x4c d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-init.o)
-                0x00005f40                __libc_init_array
- .text.malloc   0x00005f8c       0x14 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-malloc.o)
-                0x00005f8c                malloc
- .text.memset   0x00005fa0       0x10 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-memset.o)
-                0x00005fa0                memset
+                0x00005ff0       0x4c d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-init.o)
+                0x00005ff0                __libc_init_array
+ .text.malloc   0x0000603c       0x14 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-malloc.o)
+                0x0000603c                malloc
+ .text.memset   0x00006050       0x10 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-memset.o)
+                0x00006050                memset
  .text._calloc_r
-                0x00005fb0       0x1c d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-nano-callocr.o)
-                0x00005fb0                _calloc_r
+                0x00006060       0x1c d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-nano-callocr.o)
+                0x00006060                _calloc_r
  .text._malloc_r
-                0x00005fcc       0xa8 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-nano-mallocr.o)
-                0x00005fcc                _malloc_r
- .text._sbrk_r  0x00006074       0x24 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-sbrkr.o)
-                0x00006074                _sbrk_r
- .text._sbrk    0x00006098       0x34 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libnosys.a(sbrk.o)
-                0x00006098                _sbrk
- .text._exit    0x000060cc        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libnosys.a(_exit.o)
-                0x000060cc                _exit
+                0x0000607c       0xa8 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-nano-mallocr.o)
+                0x0000607c                _malloc_r
+ .text._sbrk_r  0x00006124       0x24 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-sbrkr.o)
+                0x00006124                _sbrk_r
+ .text._sbrk    0x00006148       0x34 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libnosys.a(sbrk.o)
+                0x00006148                _sbrk
+ .text._exit    0x0000617c        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libnosys.a(_exit.o)
+                0x0000617c                _exit
  *(.rodata)
- .rodata        0x000060d0       0x40 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m\libgcc.a(divdf3.o)
- .rodata        0x00006110       0x40 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m\libgcc.a(muldf3.o)
+ .rodata        0x00006180       0x40 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m\libgcc.a(divdf3.o)
+ .rodata        0x000061c0       0x40 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m\libgcc.a(muldf3.o)
  *(.rodata*)
  .rodata.Io_Sch_OsTasks
-                0x00006150       0x38 ./Sources/System/Scheduler/io_sch_cnf.o
-                0x00006150                Io_Sch_OsTasks
+                0x00006200       0x38 ./Sources/System/Scheduler/io_sch_cnf.o
+                0x00006200                Io_Sch_OsTasks
  .rodata.Io_Sch_OsConfig
-                0x00006188        0x8 ./Sources/System/Scheduler/io_sch_cnf.o
-                0x00006188                Io_Sch_OsConfig
+                0x00006238        0x8 ./Sources/System/Scheduler/io_sch_cnf.o
+                0x00006238                Io_Sch_OsConfig
  .rodata.Io_Tpm_Pwm_Ch_Cnf
-                0x00006190       0x18 ./Sources/MCU_drivers/Tpm/io_tpm_cnf.o
-                0x00006190                Io_Tpm_Pwm_Ch_Cnf
+                0x00006240       0x18 ./Sources/MCU_drivers/Tpm/io_tpm_cnf.o
+                0x00006240                Io_Tpm_Pwm_Ch_Cnf
  .rodata.Io_Tpm_Dcm_Ch_Cnf
-                0x000061a8       0x30 ./Sources/MCU_drivers/Tpm/io_tpm_cnf.o
-                0x000061a8                Io_Tpm_Dcm_Ch_Cnf
+                0x00006258       0x30 ./Sources/MCU_drivers/Tpm/io_tpm_cnf.o
+                0x00006258                Io_Tpm_Dcm_Ch_Cnf
  .rodata.Io_Tpm_Dev_Cnf
-                0x000061d8       0x24 ./Sources/MCU_drivers/Tpm/io_tpm_cnf.o
-                0x000061d8                Io_Tpm_Dev_Cnf
+                0x00006288       0x24 ./Sources/MCU_drivers/Tpm/io_tpm_cnf.o
+                0x00006288                Io_Tpm_Dev_Cnf
  .rodata.Io_Tpm_Cnf
-                0x000061fc       0x18 ./Sources/MCU_drivers/Tpm/io_tpm_cnf.o
-                0x000061fc                Io_Tpm_Cnf
+                0x000062ac       0x18 ./Sources/MCU_drivers/Tpm/io_tpm_cnf.o
+                0x000062ac                Io_Tpm_Cnf
  .rodata.Io_Pcs_PortTab
-                0x00006214       0x14 ./Sources/MCU_drivers/Pcs/io_pcs.o
-                0x00006214                Io_Pcs_PortTab
+                0x000062c4       0x14 ./Sources/MCU_drivers/Pcs/io_pcs.o
+                0x000062c4                Io_Pcs_PortTab
  .rodata.Io_Pcs_FGPIO
-                0x00006228       0x14 ./Sources/MCU_drivers/Pcs/io_pcs.o
-                0x00006228                Io_Pcs_FGPIO
+                0x000062d8       0x14 ./Sources/MCU_drivers/Pcs/io_pcs.o
+                0x000062d8                Io_Pcs_FGPIO
  .rodata.Io_Pcs_GetPinInfo
-                0x0000623c       0x18 ./Sources/MCU_drivers/Pcs/io_pcs.o
+                0x000062ec       0x18 ./Sources/MCU_drivers/Pcs/io_pcs.o
  .rodata.Io_Pcs_PortCnf
-                0x00006254      0x18c ./Sources/MCU_drivers/Pcs/io_pcs_cnf.o
-                0x00006254                Io_Pcs_PortCnf
+                0x00006304      0x18c ./Sources/MCU_drivers/Pcs/io_pcs_cnf.o
+                0x00006304                Io_Pcs_PortCnf
  .rodata.Io_Pcs_Cnf
-                0x000063e0        0x8 ./Sources/MCU_drivers/Pcs/io_pcs_cnf.o
-                0x000063e0                Io_Pcs_Cnf
+                0x00006490        0x8 ./Sources/MCU_drivers/Pcs/io_pcs_cnf.o
+                0x00006490                Io_Pcs_Cnf
  .rodata.Io_Int_InterruptCnf
-                0x000063e8       0x38 ./Sources/MCU_drivers/Int/io_int_cnf.o
-                0x000063e8                Io_Int_InterruptCnf
+                0x00006498       0x38 ./Sources/MCU_drivers/Int/io_int_cnf.o
+                0x00006498                Io_Int_InterruptCnf
  .rodata.Io_Int_Cnf
-                0x00006420        0x8 ./Sources/MCU_drivers/Int/io_int_cnf.o
-                0x00006420                Io_Int_Cnf
+                0x000064d0        0x8 ./Sources/MCU_drivers/Int/io_int_cnf.o
+                0x000064d0                Io_Int_Cnf
  .rodata.Io_Dio_PortTab
-                0x00006428       0x14 ./Sources/MCU_drivers/Dio/io_dio.o
-                0x00006428                Io_Dio_PortTab
+                0x000064d8       0x14 ./Sources/MCU_drivers/Dio/io_dio.o
+                0x000064d8                Io_Dio_PortTab
  .rodata.asy_tx_sig0
-                0x0000643c        0x8 ./Sources/MCU_drivers/Asy/io_asy_cnf.o
-                0x0000643c                asy_tx_sig0
+                0x000064ec        0x8 ./Sources/MCU_drivers/Asy/io_asy_cnf.o
+                0x000064ec                asy_tx_sig0
  .rodata.asy_rx_sig0
-                0x00006444        0x8 ./Sources/MCU_drivers/Asy/io_asy_cnf.o
-                0x00006444                asy_rx_sig0
+                0x000064f4        0x8 ./Sources/MCU_drivers/Asy/io_asy_cnf.o
+                0x000064f4                asy_rx_sig0
  .rodata.asy_err_sig0
-                0x0000644c        0x8 ./Sources/MCU_drivers/Asy/io_asy_cnf.o
-                0x0000644c                asy_err_sig0
+                0x000064fc        0x8 ./Sources/MCU_drivers/Asy/io_asy_cnf.o
+                0x000064fc                asy_err_sig0
  .rodata.asy_tx_sig1
-                0x00006454        0x8 ./Sources/MCU_drivers/Asy/io_asy_cnf.o
-                0x00006454                asy_tx_sig1
+                0x00006504        0x8 ./Sources/MCU_drivers/Asy/io_asy_cnf.o
+                0x00006504                asy_tx_sig1
  .rodata.asy_rx_sig1
-                0x0000645c        0x8 ./Sources/MCU_drivers/Asy/io_asy_cnf.o
-                0x0000645c                asy_rx_sig1
+                0x0000650c        0x8 ./Sources/MCU_drivers/Asy/io_asy_cnf.o
+                0x0000650c                asy_rx_sig1
  .rodata.asy_err_sig1
-                0x00006464        0x8 ./Sources/MCU_drivers/Asy/io_asy_cnf.o
-                0x00006464                asy_err_sig1
+                0x00006514        0x8 ./Sources/MCU_drivers/Asy/io_asy_cnf.o
+                0x00006514                asy_err_sig1
  .rodata.asy_channels
-                0x0000646c       0x28 ./Sources/MCU_drivers/Asy/io_asy_cnf.o
-                0x0000646c                asy_channels
+                0x0000651c       0x28 ./Sources/MCU_drivers/Asy/io_asy_cnf.o
+                0x0000651c                asy_channels
  .rodata.config_asy_device
-                0x00006494        0x8 ./Sources/MCU_drivers/Asy/io_asy_cnf.o
-                0x00006494                config_asy_device
+                0x00006544        0x8 ./Sources/MCU_drivers/Asy/io_asy_cnf.o
+                0x00006544                config_asy_device
  .rodata.config_adc_autoscan_channels
-                0x0000649c       0x10 ./Sources/MCU_drivers/Adc/io_adc_cnf.o
-                0x0000649c                config_adc_autoscan_channels
+                0x0000654c       0x10 ./Sources/MCU_drivers/Adc/io_adc_cnf.o
+                0x0000654c                config_adc_autoscan_channels
  .rodata.config_adc_ptr
-                0x000064ac        0x8 ./Sources/MCU_drivers/Adc/io_adc_cnf.o
-                0x000064ac                config_adc_ptr
+                0x0000655c        0x8 ./Sources/MCU_drivers/Adc/io_adc_cnf.o
+                0x0000655c                config_adc_ptr
  .rodata.Io_Hbr_Drv8833_PortCnf
-                0x000064b4       0x10 ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_cnf_ti8833.o
-                0x000064b4                Io_Hbr_Drv8833_PortCnf
+                0x00006564       0x10 ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_cnf_ti8833.o
+                0x00006564                Io_Hbr_Drv8833_PortCnf
  .rodata.Io_Hbr_Drv8833_Cnf
-                0x000064c4        0x8 ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_cnf_ti8833.o
-                0x000064c4                Io_Hbr_Drv8833_Cnf
+                0x00006574        0x8 ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_cnf_ti8833.o
+                0x00006574                Io_Hbr_Drv8833_Cnf
  .rodata.Io_Hbr_Drv8833_Set_State
-                0x000064cc       0x18 ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_ti8833.o
+                0x0000657c       0x18 ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_ti8833.o
  .rodata.Algo_Robo_Pp_CarDecisionParallelPark
-                0x000064e4       0x28 ./Sources/Application/Path_planner/app_robo_path_planner.o
+                0x00006594       0x28 ./Sources/Application/Path_planner/app_robo_path_planner.o
  .rodata.Algo_Robo_Pp_CarDecisionScheduler
-                0x0000650c       0x14 ./Sources/Application/Path_planner/app_robo_path_planner.o
+                0x000065bc       0x14 ./Sources/Application/Path_planner/app_robo_path_planner.o
  .rodata.Algo_Robo_Pp_DetermineNextCarState
-                0x00006520       0x18 ./Sources/Application/Path_planner/app_robo_path_planner.o
+                0x000065d0       0x18 ./Sources/Application/Path_planner/app_robo_path_planner.o
  .rodata.Algo_Robo_Pp_CalculateRotationTime
-                0x00006538       0x7c ./Sources/Application/Path_planner/app_robo_path_planner.o
+                0x000065e8       0x7c ./Sources/Application/Path_planner/app_robo_path_planner.o
  .rodata.Io_Bluetooth_State
-                0x000065b4       0x74 ./Sources/Application/Bluetooth/io_bluetooth.o
+                0x00006664       0xd8 ./Sources/Application/Bluetooth/io_bluetooth.o
  .rodata.str1.1
-                0x00006628        0x2 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-impure.o)
- *fill*         0x0000662a        0x2 
+                0x0000673c        0x2 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-impure.o)
+ *fill*         0x0000673e        0x2 
  .rodata._global_impure_ptr
-                0x0000662c        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-impure.o)
-                0x0000662c                _global_impure_ptr
+                0x00006740        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-impure.o)
+                0x00006740                _global_impure_ptr
  *(.glue_7)
  .glue_7        0x00000000        0x0 linker stubs
  *(.glue_7t)
  .glue_7t       0x00000000        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x00006630        0x0 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crtbegin.o
+ .eh_frame      0x00006744        0x0 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crtbegin.o
  *(.init)
- .init          0x00006630        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crti.o
-                0x00006630                _init
- .init          0x00006634        0x8 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crtn.o
+ .init          0x00006744        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crti.o
+                0x00006744                _init
+ .init          0x00006748        0x8 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crtn.o
  *(.fini)
- .fini          0x0000663c        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crti.o
-                0x0000663c                _fini
- .fini          0x00006640        0x8 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crtn.o
-                0x00006648                . = ALIGN (0x4)
+ .fini          0x00006750        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crti.o
+                0x00006750                _fini
+ .fini          0x00006754        0x8 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crtn.o
+                0x0000675c                . = ALIGN (0x4)
 
-.vfp11_veneer   0x00006648        0x0
+.vfp11_veneer   0x0000675c        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x00006648        0x0
+.v4_bx          0x0000675c        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x00006648        0x0
+.iplt           0x0000675c        0x0
  .iplt          0x00000000        0x0 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x00006648        0x8
-                0x00006648                __exidx_start = .
+.ARM            0x0000675c        0x8
+                0x0000675c                __exidx_start = .
  *(.ARM.exidx*)
- .ARM.exidx     0x00006648        0x8 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m/crt0.o
-                0x00006650                __exidx_end = .
+ .ARM.exidx     0x0000675c        0x8 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m/crt0.o
+                0x00006764                __exidx_end = .
 
-.rel.dyn        0x00006650        0x0
+.rel.dyn        0x00006764        0x0
  .rel.iplt      0x00000000        0x0 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crtbegin.o
 
-.ctors          0x00006650        0x0
-                0x00006650                __CTOR_LIST__ = .
+.ctors          0x00006764        0x0
+                0x00006764                __CTOR_LIST__ = .
  *crtbegin.o(.ctors)
  *crtbegin?.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
  *(SORT(.ctors.*))
  *(.ctors)
-                0x00006650                __CTOR_END__ = .
+                0x00006764                __CTOR_END__ = .
 
-.dtors          0x00006650        0x0
-                0x00006650                __DTOR_LIST__ = .
+.dtors          0x00006764        0x0
+                0x00006764                __DTOR_LIST__ = .
  *crtbegin.o(.dtors)
  *crtbegin?.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .dtors)
  *(SORT(.dtors.*))
  *(.dtors)
-                0x00006650                __DTOR_END__ = .
+                0x00006764                __DTOR_END__ = .
 
-.preinit_array  0x00006650        0x0
-                0x00006650                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x00006764        0x0
+                0x00006764                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
-                0x00006650                PROVIDE (__preinit_array_end, .)
+                0x00006764                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x00006650        0x4
-                0x00006650                PROVIDE (__init_array_start, .)
+.init_array     0x00006764        0x4
+                0x00006764                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array*)
- .init_array    0x00006650        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crtbegin.o
-                0x00006654                PROVIDE (__init_array_end, .)
+ .init_array    0x00006764        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crtbegin.o
+                0x00006768                PROVIDE (__init_array_end, .)
 
-.fini_array     0x00006654        0x4
-                0x00006654                PROVIDE (__fini_array_start, .)
+.fini_array     0x00006768        0x4
+                0x00006768                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x00006654        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crtbegin.o
-                0x00006658                PROVIDE (__fini_array_end, .)
-                0x00006658                __etext = .
-                0x00006658                __DATA_ROM = .
+ .fini_array    0x00006768        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crtbegin.o
+                0x0000676c                PROVIDE (__fini_array_end, .)
+                0x0000676c                __etext = .
+                0x0000676c                __DATA_ROM = .
 
 .mtb            0x1ffff000        0x0
                 0x1ffff000                . = ALIGN (0x8)
@@ -2999,7 +3084,7 @@ LOAD d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4
                 0x1ffff000                . = ALIGN (0x8)
                 0x1ffff000                _mtb_end = .
 
-.data           0x1ffff000       0x70 load address 0x00006658
+.data           0x1ffff000       0x70 load address 0x0000676c
                 0x1ffff000                . = ALIGN (0x4)
                 0x1ffff000                __DATA_RAM = .
                 0x1ffff000                __data_start__ = .
@@ -3018,12 +3103,12 @@ LOAD d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4
  .jcr           0x1ffff06c        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crtend.o
                 0x1ffff070                . = ALIGN (0x4)
                 0x1ffff070                __data_end__ = .
-                0x000066c8                __DATA_END = (__DATA_ROM + (__data_end__ - __data_start__))
+                0x000067dc                __DATA_END = (__DATA_ROM + (__data_end__ - __data_start__))
 
-.igot.plt       0x1ffff070        0x0 load address 0x000066c8
+.igot.plt       0x1ffff070        0x0 load address 0x000067dc
  .igot.plt      0x00000000        0x0 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv6-m/crtbegin.o
 
-.bss            0x1ffff070      0x82c load address 0x000066c8
+.bss            0x1ffff070      0x83c load address 0x000067dc
                 0x1ffff070                . = ALIGN (0x4)
                 0x1ffff070                __START_BSS = .
                 0x1ffff070                __bss_start__ = .
@@ -3040,143 +3125,151 @@ LOAD d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4
  .bss.delaysend
                 0x1ffff098        0x4 ./Sources/Application/Bluetooth/io_bluetooth.o
                 0x1ffff098                delaysend
+ .bss.rotationValue
+                0x1ffff09c        0x1 ./Sources/Application/Bluetooth/io_bluetooth.o
+                0x1ffff09c                rotationValue
+ *fill*         0x1ffff09d        0x3 
  .bss.__malloc_sbrk_start
-                0x1ffff09c        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-nano-mallocr.o)
-                0x1ffff09c                __malloc_sbrk_start
- .bss.__malloc_free_list
                 0x1ffff0a0        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-nano-mallocr.o)
-                0x1ffff0a0                __malloc_free_list
+                0x1ffff0a0                __malloc_sbrk_start
+ .bss.__malloc_free_list
+                0x1ffff0a4        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-nano-mallocr.o)
+                0x1ffff0a4                __malloc_free_list
  .bss.heap_end.4246
-                0x1ffff0a4        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libnosys.a(sbrk.o)
+                0x1ffff0a8        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libnosys.a(sbrk.o)
  *(COMMON)
- COMMON         0x1ffff0a8       0x14 ./Sources/System/Scheduler/io_sch.o
-                0x1ffff0a8                Io_Sch_OsCounter
-                0x1ffff0b8                Io_Sch_OsConfigPtr
- COMMON         0x1ffff0bc       0x1c ./Sources/System/Scheduler/io_sch_cnf.o
-                0x1ffff0bc                Io_Sch_TaskCounter50ms
-                0x1ffff0c0                Io_Sch_TaskCounter200ms
-                0x1ffff0c4                Io_Sch_TaskCounter10ms
-                0x1ffff0c8                Io_Sch_TaskCounter100ms
-                0x1ffff0cc                Io_Sch_TaskCounter1000ms
-                0x1ffff0d0                Io_Sch_TaskCounter1ms
-                0x1ffff0d4                Io_Sch_TaskCounter0ms
- COMMON         0x1ffff0d8      0x4ec ./Sources/System/Os/io_os.o
-                0x1ffff0d8                Io_Os_PriorityQueues
-                0x1ffff368                Io_Os_PeriodicQueueDepth
-                0x1ffff36c                Io_Os_PeriodicQueue
- COMMON         0x1ffff5c4       0x5d ./Sources/MCU_drivers/Tpm/io_tpm.o
-                0x1ffff5c4                Io_Tpm_Tpm0Used
-                0x1ffff5c8                Io_Tpm_Dcm_Channels
-                0x1ffff610                Io_Tpm_Tpm2Used
-                0x1ffff614                Io_Tpm_PwmChLastDutycycle
-                0x1ffff618                Io_Tpm_Tpm1Used
-                0x1ffff61c                Io_Tpm_Cnf_Ptr
-                0x1ffff620                Io_Tpm_Initialized
- *fill*         0x1ffff621        0x3 
- COMMON         0x1ffff624        0x4 ./Sources/MCU_drivers/Pcs/io_pcs.o
-                0x1ffff624                Io_Pcs_CnfPtr
- COMMON         0x1ffff628       0xc4 ./Sources/MCU_drivers/Int/io_int.o
-                0x1ffff628                Io_Int_CnfPtr
-                0x1ffff62c                array_of_handlers
- COMMON         0x1ffff6ec       0x78 ./Sources/MCU_drivers/Asy/io_asy.o
-                0x1ffff6ec                basy_phy_to_log_ch
-                0x1ffff6f0                Io_Asy_channel_table
-                0x1ffff738                io_asy_config_device_int
-                0x1ffff73c                tx_table
-                0x1ffff74c                Io_Asy_ch_info_ptr_int
-                0x1ffff750                c
-                0x1ffff754                rx_table
- COMMON         0x1ffff764       0x20 ./Sources/MCU_drivers/Adc/io_adc.o
-                0x1ffff764                Io_Adc_Data_var
-                0x1ffff77c                Io_Adc_ConfigPtr
-                0x1ffff780                Io_Adc_Data
- COMMON         0x1ffff784       0x8e ./Sources/HW_drivers/Sensors/Proximity/io_sens_ir.o
-                0x1ffff784                Io_Sens_sensorRearDistanceMm
-                0x1ffff788                Io_Sens_sensorSamplesVectorRight
-                0x1ffff79c                Io_Sens_measurementmV
-                0x1ffff7a0                Io_Sens_USONIC_sensorSamplesVectorRight
-                0x1ffff7a6                Io_Sens_sensorLeftDistanceCm
-                0x1ffff7a8                Io_Sens_sensorSamplesVectorFront
-                0x1ffff7bc                Io_Sens_sensorRightDistanceCm
-                0x1ffff7be                Io_Sens_sensorRightDistanceMm
-                0x1ffff7c0                Io_Sens_sensorSamplesVectorLeft
-                0x1ffff7d4                Io_Sens_sensorSamplesVectorRear
-                0x1ffff7e8                Io_Sens_sensorSamplesCounter
-                0x1ffff7e9                Io_Sens_USONIC_sensorRearDistanceCm
-                0x1ffff7ea                Io_Sens_USONIC_sensorFrontDistanceCm
-                0x1ffff7eb                Io_Sens_USONIC_sensorRightDistanceCm
-                0x1ffff7ec                Io_Sens_USONIC_sensorSamplesVectorLeft
-                0x1ffff7f2                Io_Sens_sensorRearDistanceCm
-                0x1ffff7f4                delay
-                0x1ffff7f8                Io_Sens_sensorLeftDistanceMm
-                0x1ffff7fa                Io_Sens_USONIC_sensorSamplesCounter
-                0x1ffff7fc                Io_Sens_sensorFrontDistanceMm
-                0x1ffff800                Io_Sens_USONIC_sensorSamplesVectorRear
-                0x1ffff806                Io_Sens_USONIC_sensorLeftDistanceCm
-                0x1ffff808                Io_Sens_measurementuS
-                0x1ffff80a                Io_Sens_sensorFrontDistanceCm
-                0x1ffff80c                Io_Sens_USONIC_sensorSamplesVectorFront
- *fill*         0x1ffff812        0x2 
- COMMON         0x1ffff814        0x8 ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_ti8833.o
-                0x1ffff814                hbr_drv8833_config
-                0x1ffff818                hbr_drv8833_state
- COMMON         0x1ffff81c       0x18 ./Sources/Application/Speed_calc/app_robo_speed_calc.o
-                0x1ffff81c                Algo_Robo_Sc_LeftEncoder
-                0x1ffff828                Algo_Robo_Sc_RightEncoder
- COMMON         0x1ffff834       0x50 ./Sources/Application/Path_planner/app_robo_path_planner.o
-                0x1ffff834                Algo_Robo_Pp_ParallelParkFlag
-                0x1ffff836                Algo_Robo_Pp_CoveredDistanceCm
-                0x1ffff838                Algo_Robo_Pp_TimerCarParkedState
-                0x1ffff83c                Algo_Robo_Pp_TimerCarRotateLeft
-                0x1ffff840                Algo_Robo_Pp_TimerPendingState
-                0x1ffff844                Algo_Robo_Pp_TimerInitialState
-                0x1ffff848                Algo_Robo_Pp_MoveForwardCm
-                0x1ffff84a                Algo_Robo_Pp_CarCurrentSpeedCmPerS
-                0x1ffff84c                Algo_Robo_Pp_SpotLengthCm
-                0x1ffff84e                Algo_Robo_Pp_MoveBackCm
-                0x1ffff850                Algo_Robo_Pp_TimerParallelParkState
-                0x1ffff854                Algo_Robo_Pp_TimerSpotCalcState
-                0x1ffff858                Algo_Robo_Pp_TimerCarRotateRight
-                0x1ffff85c                Algo_Robo_Pp_CarMovement
-                0x1ffff860                Algo_Robo_Pp_TimerCarMoveForward
-                0x1ffff864                Algo_Robo_Pp_TimerDefaultState
-                0x1ffff868                Algo_Robo_Pp_TimerCarMoveBackward
-                0x1ffff86c                Algo_Robo_Pp_LastCarState
-                0x1ffff870                Algo_Robo_Pp_TimerSpotDetectedState
-                0x1ffff874                Algo_Robo_Pp_DistanceLastObstacleRightCm
-                0x1ffff875                Algo_Robo_Pp_CarState
-                0x1ffff878                Algo_Robo_Pp_TimerCarStopped
-                0x1ffff87c                Algo_Robo_Pp_LastCarMovement
-                0x1ffff87d                Algo_Robo_Pp_CarTask
-                0x1ffff880                Algo_Robo_Pp_TimerSpotDetectionState
- COMMON         0x1ffff884       0x10 ./Sources/Application/Car_movement/app_robo_car_movement.o
-                0x1ffff884                Algo_Robo_Cm_TimerMoveBackward
-                0x1ffff888                Algo_Robo_Cm_TimerRotateRight
-                0x1ffff88c                Algo_Robo_Cm_TimerMoveForward
-                0x1ffff890                Algo_Robo_Cm_TimerRotateLeft
- COMMON         0x1ffff894        0x1 ./Sources/Application/Bluetooth/io_bluetooth.o
-                0x1ffff894                sensor
- *fill*         0x1ffff895        0x3 
- COMMON         0x1ffff898        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-reent.o)
-                0x1ffff898                errno
-                0x1ffff89c                . = ALIGN (0x4)
-                0x1ffff89c                __bss_end__ = .
-                0x1ffff89c                __END_BSS = .
+ COMMON         0x1ffff0ac       0x14 ./Sources/System/Scheduler/io_sch.o
+                0x1ffff0ac                Io_Sch_OsCounter
+                0x1ffff0bc                Io_Sch_OsConfigPtr
+ COMMON         0x1ffff0c0       0x1c ./Sources/System/Scheduler/io_sch_cnf.o
+                0x1ffff0c0                Io_Sch_TaskCounter50ms
+                0x1ffff0c4                Io_Sch_TaskCounter200ms
+                0x1ffff0c8                Io_Sch_TaskCounter10ms
+                0x1ffff0cc                Io_Sch_TaskCounter100ms
+                0x1ffff0d0                Io_Sch_TaskCounter1000ms
+                0x1ffff0d4                Io_Sch_TaskCounter1ms
+                0x1ffff0d8                Io_Sch_TaskCounter0ms
+ COMMON         0x1ffff0dc      0x4ec ./Sources/System/Os/io_os.o
+                0x1ffff0dc                Io_Os_PriorityQueues
+                0x1ffff36c                Io_Os_PeriodicQueueDepth
+                0x1ffff370                Io_Os_PeriodicQueue
+ COMMON         0x1ffff5c8       0x5d ./Sources/MCU_drivers/Tpm/io_tpm.o
+                0x1ffff5c8                Io_Tpm_Tpm0Used
+                0x1ffff5cc                Io_Tpm_Dcm_Channels
+                0x1ffff614                Io_Tpm_Tpm2Used
+                0x1ffff618                Io_Tpm_PwmChLastDutycycle
+                0x1ffff61c                Io_Tpm_Tpm1Used
+                0x1ffff620                Io_Tpm_Cnf_Ptr
+                0x1ffff624                Io_Tpm_Initialized
+ *fill*         0x1ffff625        0x3 
+ COMMON         0x1ffff628        0x4 ./Sources/MCU_drivers/Pcs/io_pcs.o
+                0x1ffff628                Io_Pcs_CnfPtr
+ COMMON         0x1ffff62c       0xc4 ./Sources/MCU_drivers/Int/io_int.o
+                0x1ffff62c                Io_Int_CnfPtr
+                0x1ffff630                array_of_handlers
+ COMMON         0x1ffff6f0       0x78 ./Sources/MCU_drivers/Asy/io_asy.o
+                0x1ffff6f0                basy_phy_to_log_ch
+                0x1ffff6f4                Io_Asy_channel_table
+                0x1ffff73c                io_asy_config_device_int
+                0x1ffff740                tx_table
+                0x1ffff750                Io_Asy_ch_info_ptr_int
+                0x1ffff754                c
+                0x1ffff758                rx_table
+ COMMON         0x1ffff768       0x20 ./Sources/MCU_drivers/Adc/io_adc.o
+                0x1ffff768                Io_Adc_Data_var
+                0x1ffff780                Io_Adc_ConfigPtr
+                0x1ffff784                Io_Adc_Data
+ COMMON         0x1ffff788       0x8e ./Sources/HW_drivers/Sensors/Proximity/io_sens_ir.o
+                0x1ffff788                Io_Sens_sensorRearDistanceMm
+                0x1ffff78c                Io_Sens_sensorSamplesVectorRight
+                0x1ffff7a0                Io_Sens_measurementmV
+                0x1ffff7a4                Io_Sens_USONIC_sensorSamplesVectorRight
+                0x1ffff7aa                Io_Sens_sensorLeftDistanceCm
+                0x1ffff7ac                Io_Sens_sensorSamplesVectorFront
+                0x1ffff7c0                Io_Sens_sensorRightDistanceCm
+                0x1ffff7c2                Io_Sens_sensorRightDistanceMm
+                0x1ffff7c4                Io_Sens_sensorSamplesVectorLeft
+                0x1ffff7d8                Io_Sens_sensorSamplesVectorRear
+                0x1ffff7ec                Io_Sens_sensorSamplesCounter
+                0x1ffff7ed                Io_Sens_USONIC_sensorRearDistanceCm
+                0x1ffff7ee                Io_Sens_USONIC_sensorFrontDistanceCm
+                0x1ffff7ef                Io_Sens_USONIC_sensorRightDistanceCm
+                0x1ffff7f0                Io_Sens_USONIC_sensorSamplesVectorLeft
+                0x1ffff7f6                Io_Sens_sensorRearDistanceCm
+                0x1ffff7f8                delay
+                0x1ffff7fc                Io_Sens_sensorLeftDistanceMm
+                0x1ffff7fe                Io_Sens_USONIC_sensorSamplesCounter
+                0x1ffff800                Io_Sens_sensorFrontDistanceMm
+                0x1ffff804                Io_Sens_USONIC_sensorSamplesVectorRear
+                0x1ffff80a                Io_Sens_USONIC_sensorLeftDistanceCm
+                0x1ffff80c                Io_Sens_measurementuS
+                0x1ffff80e                Io_Sens_sensorFrontDistanceCm
+                0x1ffff810                Io_Sens_USONIC_sensorSamplesVectorFront
+ *fill*         0x1ffff816        0x2 
+ COMMON         0x1ffff818        0x8 ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_ti8833.o
+                0x1ffff818                hbr_drv8833_config
+                0x1ffff81c                hbr_drv8833_state
+ COMMON         0x1ffff820       0x18 ./Sources/Application/Speed_calc/app_robo_speed_calc.o
+                0x1ffff820                Algo_Robo_Sc_LeftEncoder
+                0x1ffff82c                Algo_Robo_Sc_RightEncoder
+ COMMON         0x1ffff838       0x5c ./Sources/Application/Path_planner/app_robo_path_planner.o
+                0x1ffff838                Algo_Robo_Pp_ParallelParkFlag
+                0x1ffff83a                Algo_Robo_Pp_CoveredDistanceCm
+                0x1ffff83c                Algo_Robo_Pp_TimerCarParkedState
+                0x1ffff840                App_Robo_RotationRightSend
+                0x1ffff844                Algo_Robo_Pp_TimerCarRotateLeft
+                0x1ffff848                Algo_Robo_Pp_TimerPendingState
+                0x1ffff84c                Algo_Robo_Pp_TimerInitialState
+                0x1ffff850                Algo_Robo_Pp_MoveForwardCm
+                0x1ffff852                App_Robo_RotationLeftSend
+                0x1ffff854                Algo_Robo_Pp_CarCurrentSpeedCmPerS
+                0x1ffff856                Algo_Robo_Pp_SpotLengthCm
+                0x1ffff858                Algo_Robo_Pp_MoveBackCm
+                0x1ffff85c                Algo_Robo_Pp_TimerParallelParkState
+                0x1ffff860                App_Robo_RotationLeftFeedback
+                0x1ffff864                Algo_Robo_Pp_TimerSpotCalcState
+                0x1ffff868                Algo_Robo_Pp_TimerCarRotateRight
+                0x1ffff86c                Algo_Robo_Pp_CarMovement
+                0x1ffff870                Algo_Robo_Pp_TimerCarMoveForward
+                0x1ffff874                Algo_Robo_Pp_TimerDefaultState
+                0x1ffff878                Algo_Robo_Pp_TimerCarMoveBackward
+                0x1ffff87c                App_Robo_RotationRightFeedback
+                0x1ffff87d                Algo_Robo_Pp_LastCarState
+                0x1ffff880                Algo_Robo_Pp_TimerSpotDetectedState
+                0x1ffff884                Algo_Robo_Pp_DistanceLastObstacleRightCm
+                0x1ffff885                Algo_Robo_Pp_CarState
+                0x1ffff888                Algo_Robo_Pp_TimerCarStopped
+                0x1ffff88c                Algo_Robo_Pp_LastCarMovement
+                0x1ffff88d                Algo_Robo_Pp_CarTask
+                0x1ffff890                Algo_Robo_Pp_TimerSpotDetectionState
+ COMMON         0x1ffff894       0x10 ./Sources/Application/Car_movement/app_robo_car_movement.o
+                0x1ffff894                Algo_Robo_Cm_TimerMoveBackward
+                0x1ffff898                Algo_Robo_Cm_TimerRotateRight
+                0x1ffff89c                Algo_Robo_Cm_TimerMoveForward
+                0x1ffff8a0                Algo_Robo_Cm_TimerRotateLeft
+ COMMON         0x1ffff8a4        0x1 ./Sources/Application/Bluetooth/io_bluetooth.o
+                0x1ffff8a4                sensor
+ *fill*         0x1ffff8a5        0x3 
+ COMMON         0x1ffff8a8        0x4 d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv6-m\libg_s.a(lib_a-reent.o)
+                0x1ffff8a8                errno
+                0x1ffff8ac                . = ALIGN (0x4)
+                0x1ffff8ac                __bss_end__ = .
+                0x1ffff8ac                __END_BSS = .
 
-.heap           0x1ffff89c      0x404 load address 0x00006ef4
-                0x1ffff8a0                . = ALIGN (0x8)
- *fill*         0x1ffff89c        0x4 
-                0x1ffff8a0                __end__ = .
-                0x1ffff8a0                PROVIDE (end, .)
-                0x1ffff8a0                __HeapBase = .
-                0x1ffffca0                . = (. + HEAP_SIZE)
- *fill*         0x1ffff8a0      0x400 
-                0x1ffffca0                __HeapLimit = .
+.heap           0x1ffff8ac      0x404 load address 0x00007018
+                0x1ffff8b0                . = ALIGN (0x8)
+ *fill*         0x1ffff8ac        0x4 
+                0x1ffff8b0                __end__ = .
+                0x1ffff8b0                PROVIDE (end, .)
+                0x1ffff8b0                __HeapBase = .
+                0x1ffffcb0                . = (. + HEAP_SIZE)
+ *fill*         0x1ffff8b0      0x400 
+                0x1ffffcb0                __HeapLimit = .
 
-.stack          0x1ffffca0      0x400 load address 0x000072f8
-                0x1ffffca0                . = ALIGN (0x8)
-                0x200000a0                . = (. + STACK_SIZE)
- *fill*         0x1ffffca0      0x400 
+.stack          0x1ffffcb0      0x400 load address 0x0000741c
+                0x1ffffcb0                . = ALIGN (0x8)
+                0x200000b0                . = (. + STACK_SIZE)
+ *fill*         0x1ffffcb0      0x400 
                 0x20003000                __StackTop = (ORIGIN (m_data) + 0x4000)
                 0x20002c00                __StackLimit = (__StackTop - STACK_SIZE)
                 0x20003000                PROVIDE (__stack, __StackTop)
@@ -3305,7 +3398,7 @@ LOAD d:/programe/kinetis studio ide/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4
                 0x00000001                ASSERT ((__StackLimit >= __HeapLimit), region m_data overflowed with stack and heap)
 OUTPUT(FRDM KL26Z platform.elf elf32-littlearm)
 
-.debug_info     0x00000000     0x7133
+.debug_info     0x00000000     0x71b4
  .debug_info    0x00000000      0x1ae ./Sources/System/Scheduler/io_sch.o
  .debug_info    0x000001ae      0x268 ./Sources/System/Scheduler/io_sch_cnf.o
  .debug_info    0x00000416      0x3b2 ./Sources/System/Os/io_os.o
@@ -3326,13 +3419,13 @@ OUTPUT(FRDM KL26Z platform.elf elf32-littlearm)
  .debug_info    0x00005494      0x161 ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_cnf_ti8833.o
  .debug_info    0x000055f5      0x253 ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_ti8833.o
  .debug_info    0x00005848      0x171 ./Sources/Application/Speed_calc/app_robo_speed_calc.o
- .debug_info    0x000059b9      0x311 ./Sources/Application/Path_planner/app_robo_path_planner.o
- .debug_info    0x00005cca      0x1fa ./Sources/Application/Distance_calc/app_robo_dist_calc.o
- .debug_info    0x00005ec4      0x24a ./Sources/Application/Car_movement/app_robo_car_movement.o
- .debug_info    0x0000610e      0x190 ./Sources/Application/Bluetooth/io_bluetooth.o
- .debug_info    0x0000629e      0x797 ./Sources/main.o
- .debug_info    0x00006a35       0x99 ./Project_Settings/Startup_Code/startup_MKL26Z4.o
- .debug_info    0x00006ace      0x665 ./Project_Settings/Startup_Code/system_MKL26Z4.o
+ .debug_info    0x000059b9      0x355 ./Sources/Application/Path_planner/app_robo_path_planner.o
+ .debug_info    0x00005d0e      0x1fa ./Sources/Application/Distance_calc/app_robo_dist_calc.o
+ .debug_info    0x00005f08      0x24a ./Sources/Application/Car_movement/app_robo_car_movement.o
+ .debug_info    0x00006152      0x1cd ./Sources/Application/Bluetooth/io_bluetooth.o
+ .debug_info    0x0000631f      0x797 ./Sources/main.o
+ .debug_info    0x00006ab6       0x99 ./Project_Settings/Startup_Code/startup_MKL26Z4.o
+ .debug_info    0x00006b4f      0x665 ./Project_Settings/Startup_Code/system_MKL26Z4.o
 
 .debug_abbrev   0x00000000     0x1d06
  .debug_abbrev  0x00000000       0xe4 ./Sources/System/Scheduler/io_sch.o
@@ -3522,7 +3615,7 @@ OUTPUT(FRDM KL26Z platform.elf elf32-littlearm)
  .debug_macro   0x0000af31       0x7e ./Project_Settings/Startup_Code/system_MKL26Z4.o
  .debug_macro   0x0000afaf       0x4c ./Project_Settings/Startup_Code/system_MKL26Z4.o
 
-.debug_line     0x00000000     0x7d9b
+.debug_line     0x00000000     0x7db1
  .debug_line    0x00000000      0x2ec ./Sources/System/Scheduler/io_sch.o
  .debug_line    0x000002ec      0x792 ./Sources/System/Scheduler/io_sch_cnf.o
  .debug_line    0x00000a7e      0x538 ./Sources/System/Os/io_os.o
@@ -3543,15 +3636,15 @@ OUTPUT(FRDM KL26Z platform.elf elf32-littlearm)
  .debug_line    0x00005047      0x3f5 ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_cnf_ti8833.o
  .debug_line    0x0000543c      0x5c4 ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_ti8833.o
  .debug_line    0x00005a00      0x359 ./Sources/Application/Speed_calc/app_robo_speed_calc.o
- .debug_line    0x00005d59      0x5da ./Sources/Application/Path_planner/app_robo_path_planner.o
- .debug_line    0x00006333      0x54f ./Sources/Application/Distance_calc/app_robo_dist_calc.o
- .debug_line    0x00006882      0x511 ./Sources/Application/Car_movement/app_robo_car_movement.o
- .debug_line    0x00006d93      0x5e8 ./Sources/Application/Bluetooth/io_bluetooth.o
- .debug_line    0x0000737b      0x6ec ./Sources/main.o
- .debug_line    0x00007a67       0x85 ./Project_Settings/Startup_Code/startup_MKL26Z4.o
- .debug_line    0x00007aec      0x2af ./Project_Settings/Startup_Code/system_MKL26Z4.o
+ .debug_line    0x00005d59      0x5de ./Sources/Application/Path_planner/app_robo_path_planner.o
+ .debug_line    0x00006337      0x54f ./Sources/Application/Distance_calc/app_robo_dist_calc.o
+ .debug_line    0x00006886      0x511 ./Sources/Application/Car_movement/app_robo_car_movement.o
+ .debug_line    0x00006d97      0x5fa ./Sources/Application/Bluetooth/io_bluetooth.o
+ .debug_line    0x00007391      0x6ec ./Sources/main.o
+ .debug_line    0x00007a7d       0x85 ./Project_Settings/Startup_Code/startup_MKL26Z4.o
+ .debug_line    0x00007b02      0x2af ./Project_Settings/Startup_Code/system_MKL26Z4.o
 
-.debug_str      0x00000000    0x2d00e
+.debug_str      0x00000000    0x2d08e
  .debug_str     0x00000000    0x20cfa ./Sources/System/Scheduler/io_sch.o
                               0x21095 (size before relaxing)
  .debug_str     0x00020cfa     0x80a3 ./Sources/System/Scheduler/io_sch_cnf.o
@@ -3592,17 +3685,17 @@ OUTPUT(FRDM KL26Z platform.elf elf32-littlearm)
                               0x29969 (size before relaxing)
  .debug_str     0x0002c727       0xd5 ./Sources/Application/Speed_calc/app_robo_speed_calc.o
                               0x2282c (size before relaxing)
- .debug_str     0x0002c7fc      0x406 ./Sources/Application/Path_planner/app_robo_path_planner.o
-                              0x22f87 (size before relaxing)
- .debug_str     0x0002cc02       0xea ./Sources/Application/Distance_calc/app_robo_dist_calc.o
+ .debug_str     0x0002c7fc      0x478 ./Sources/Application/Path_planner/app_robo_path_planner.o
+                              0x22ff9 (size before relaxing)
+ .debug_str     0x0002cc74       0xea ./Sources/Application/Distance_calc/app_robo_dist_calc.o
                               0x260f1 (size before relaxing)
- .debug_str     0x0002ccec      0x1b7 ./Sources/Application/Car_movement/app_robo_car_movement.o
+ .debug_str     0x0002cd5e      0x1b7 ./Sources/Application/Car_movement/app_robo_car_movement.o
                               0x22cdb (size before relaxing)
- .debug_str     0x0002cea3       0x5e ./Sources/Application/Bluetooth/io_bluetooth.o
-                              0x272c2 (size before relaxing)
- .debug_str     0x0002cf01       0x17 ./Sources/main.o
+ .debug_str     0x0002cf15       0x6c ./Sources/Application/Bluetooth/io_bluetooth.o
+                              0x27342 (size before relaxing)
+ .debug_str     0x0002cf81       0x17 ./Sources/main.o
                               0x293f9 (size before relaxing)
- .debug_str     0x0002cf18       0xf6 ./Project_Settings/Startup_Code/system_MKL26Z4.o
+ .debug_str     0x0002cf98       0xf6 ./Project_Settings/Startup_Code/system_MKL26Z4.o
                               0x20d42 (size before relaxing)
 
 .comment        0x00000000       0x70

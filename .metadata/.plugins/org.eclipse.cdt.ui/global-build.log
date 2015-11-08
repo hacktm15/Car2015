@@ -1,4 +1,4 @@
-11:53:47 **** Incremental Build of configuration Debug for project FRDM KL26Z platform 06 nov ****
+13:57:26 **** Incremental Build of configuration Debug for project FRDM KL26Z platform 06 nov ****
 make all 
 'Building file: ../Sources/System/Scheduler/io_sch.c'
 'Invoking: Cross ARM C Compiler'
@@ -341,6 +341,11 @@ arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-ch
 arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -I"../Sources" -I"../Includes" -std=c99 -Wall -MMD -MP -MF"Sources/Application/Path_planner/app_robo_path_planner.d" -MT"Sources/Application/Path_planner/app_robo_path_planner.o" -c -o "Sources/Application/Path_planner/app_robo_path_planner.o" "../Sources/Application/Path_planner/app_robo_path_planner.c"
 'Finished building: ../Sources/Application/Path_planner/app_robo_path_planner.c'
 ' '
+'Building file: ../Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.c'
+'Invoking: Cross ARM C Compiler'
+arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -I"../Sources" -I"../Includes" -std=c99 -Wall -MMD -MP -MF"Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.d" -MT"Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o" -c -o "Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o" "../Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.c"
+'Finished building: ../Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.c'
+' '
 'Building file: ../Sources/Application/Distance_calc/app_robo_dist_calc.c'
 'Invoking: Cross ARM C Compiler'
 arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -I"../Sources" -I"../Includes" -std=c99 -Wall -MMD -MP -MF"Sources/Application/Distance_calc/app_robo_dist_calc.d" -MT"Sources/Application/Distance_calc/app_robo_dist_calc.o" -c -o "Sources/Application/Distance_calc/app_robo_dist_calc.o" "../Sources/Application/Distance_calc/app_robo_dist_calc.c"
@@ -355,37 +360,51 @@ arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-ch
 'Invoking: Cross ARM C Compiler'
 arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -I"../Sources" -I"../Includes" -std=c99 -Wall -MMD -MP -MF"Sources/Application/Bluetooth/io_bluetooth.d" -MT"Sources/Application/Bluetooth/io_bluetooth.o" -c -o "Sources/Application/Bluetooth/io_bluetooth.o" "../Sources/Application/Bluetooth/io_bluetooth.c"
 ../Sources/Application/Bluetooth/io_bluetooth.c: In function 'Io_Bluetooth_State':
-../Sources/Application/Bluetooth/io_bluetooth.c:102:4: warning: pointer targets in passing argument 3 of 'Io_Asy_TxData' differ in signedness [-Wpointer-sign]
+../Sources/Application/Bluetooth/io_bluetooth.c:103:4: warning: pointer targets in passing argument 3 of 'Io_Asy_TxData' differ in signedness [-Wpointer-sign]
     Io_Asy_TxData(0,1,&sensor);
     ^
 In file included from ../Sources/Application/Bluetooth/io_bluetooth.c:25:0:
 ../Sources/MCU_drivers/Asy/io_asy.h:71:13: note: expected 'uint8 *' but argument is of type 'char *'
  extern void Io_Asy_TxData(uint16 ch, uint8 tx_length, uint8 *transmit_buffer);
              ^
-../Sources/Application/Bluetooth/io_bluetooth.c:109:4: warning: pointer targets in passing argument 3 of 'Io_Asy_TxData' differ in signedness [-Wpointer-sign]
+../Sources/Application/Bluetooth/io_bluetooth.c:110:4: warning: pointer targets in passing argument 3 of 'Io_Asy_TxData' differ in signedness [-Wpointer-sign]
     Io_Asy_TxData(0,1,&sensor);
     ^
 In file included from ../Sources/Application/Bluetooth/io_bluetooth.c:25:0:
 ../Sources/MCU_drivers/Asy/io_asy.h:71:13: note: expected 'uint8 *' but argument is of type 'char *'
  extern void Io_Asy_TxData(uint16 ch, uint8 tx_length, uint8 *transmit_buffer);
              ^
-../Sources/Application/Bluetooth/io_bluetooth.c:117:4: warning: pointer targets in passing argument 3 of 'Io_Asy_TxData' differ in signedness [-Wpointer-sign]
+../Sources/Application/Bluetooth/io_bluetooth.c:118:4: warning: pointer targets in passing argument 3 of 'Io_Asy_TxData' differ in signedness [-Wpointer-sign]
     Io_Asy_TxData(0,1,&sensor);
     ^
 In file included from ../Sources/Application/Bluetooth/io_bluetooth.c:25:0:
 ../Sources/MCU_drivers/Asy/io_asy.h:71:13: note: expected 'uint8 *' but argument is of type 'char *'
  extern void Io_Asy_TxData(uint16 ch, uint8 tx_length, uint8 *transmit_buffer);
              ^
-../Sources/Application/Bluetooth/io_bluetooth.c:124:4: warning: pointer targets in passing argument 3 of 'Io_Asy_TxData' differ in signedness [-Wpointer-sign]
+../Sources/Application/Bluetooth/io_bluetooth.c:125:4: warning: pointer targets in passing argument 3 of 'Io_Asy_TxData' differ in signedness [-Wpointer-sign]
     Io_Asy_TxData(0,1,&sensor);
     ^
 In file included from ../Sources/Application/Bluetooth/io_bluetooth.c:25:0:
 ../Sources/MCU_drivers/Asy/io_asy.h:71:13: note: expected 'uint8 *' but argument is of type 'char *'
  extern void Io_Asy_TxData(uint16 ch, uint8 tx_length, uint8 *transmit_buffer);
              ^
-../Sources/Application/Bluetooth/io_bluetooth.c:138:4: warning: pointer targets in passing argument 3 of 'Io_Asy_TxData' differ in signedness [-Wpointer-sign]
+../Sources/Application/Bluetooth/io_bluetooth.c:139:4: warning: pointer targets in passing argument 3 of 'Io_Asy_TxData' differ in signedness [-Wpointer-sign]
     Io_Asy_TxData(0,1,&sensor);
     ^
+In file included from ../Sources/Application/Bluetooth/io_bluetooth.c:25:0:
+../Sources/MCU_drivers/Asy/io_asy.h:71:13: note: expected 'uint8 *' but argument is of type 'char *'
+ extern void Io_Asy_TxData(uint16 ch, uint8 tx_length, uint8 *transmit_buffer);
+             ^
+../Sources/Application/Bluetooth/io_bluetooth.c:149:5: warning: pointer targets in passing argument 3 of 'Io_Asy_TxData' differ in signedness [-Wpointer-sign]
+     Io_Asy_TxData(0,1,&rotationValue);
+     ^
+In file included from ../Sources/Application/Bluetooth/io_bluetooth.c:25:0:
+../Sources/MCU_drivers/Asy/io_asy.h:71:13: note: expected 'uint8 *' but argument is of type 'char *'
+ extern void Io_Asy_TxData(uint16 ch, uint8 tx_length, uint8 *transmit_buffer);
+             ^
+../Sources/Application/Bluetooth/io_bluetooth.c:161:6: warning: pointer targets in passing argument 3 of 'Io_Asy_TxData' differ in signedness [-Wpointer-sign]
+      Io_Asy_TxData(0,1,&rotationValue);
+      ^
 In file included from ../Sources/Application/Bluetooth/io_bluetooth.c:25:0:
 ../Sources/MCU_drivers/Asy/io_asy.h:71:13: note: expected 'uint8 *' but argument is of type 'char *'
  extern void Io_Asy_TxData(uint16 ch, uint8 tx_length, uint8 *transmit_buffer);
@@ -422,6 +441,10 @@ arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-ch
 ' '
 'Building target: FRDM KL26Z platform.elf'
 'Invoking: Cross ARM C++ Linker'
-arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -T "MKL26Z128xxx4_flash.ld" -Xlinker --gc-sections -L"C:/Users/Gabi/Desktop/HackTM/FRDM KL26Z platform 06 nov/Project_Settings/Linker_Files" -Wl,-Map,"FRDM KL26Z platform.map" -specs=nano.specs -specs=nosys.specs -o "FRDM KL26Z platform.elf"  ./Sources/System/Scheduler/io_sch.o ./Sources/System/Scheduler/io_sch_cnf.o  ./Sources/System/Os/io_os.o  ./Sources/System/Error_handling/io_traps.o  ./Sources/Other_functions/io_func.o  ./Sources/MCU_drivers/Wdt/io_wdt.o  ./Sources/MCU_drivers/Tpm/io_tpm.o ./Sources/MCU_drivers/Tpm/io_tpm_cnf.o  ./Sources/MCU_drivers/Timer/io_tim.o  ./Sources/MCU_drivers/Pcs/io_pcs.o ./Sources/MCU_drivers/Pcs/io_pcs_cnf.o  ./Sources/MCU_drivers/Int/io_int.o ./Sources/MCU_drivers/Int/io_int_cnf.o  ./Sources/MCU_drivers/I2c/io_i2c.o ./Sources/MCU_drivers/I2c/io_i2c_cnf.o  ./Sources/MCU_drivers/Dio/io_dio.o  ./Sources/MCU_drivers/Asy/io_asy.o ./Sources/MCU_drivers/Asy/io_asy_cnf.o  ./Sources/MCU_drivers/Adc/io_adc.o ./Sources/MCU_drivers/Adc/io_adc_cnf.o  ./Sources/HW_drivers/Stepper_motor/io_smc.o ./Sources/HW_drivers/Stepper_motor/io_smc_cnf.o  ./Sources/HW_drivers/Sensors/Proximity/io_sens_ir.o  ./Sources/HW_drivers/Sensors/Accel_Magnet/FX0S8700.o  ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_cnf_ti8833.o ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_ti8833.o  ./Sources/Application/Speed_calc/app_robo_speed_calc.o  ./Sources/Application/Path_planner/app_robo_path_planner.o  ./Sources/Application/Distance_calc/app_robo_dist_calc.o  ./Sources/Application/Car_movement/app_robo_car_movement.o  ./Sources/Application/Bluetooth/io_bluetooth.o  ./Sources/main.o  ./Project_Settings/Startup_Code/startup_MKL26Z4.o ./Project_Settings/Startup_Code/system_MKL26Z4.o   
+arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -T "MKL26Z128xxx4_flash.ld" -Xlinker --gc-sections -L"C:/Users/Gabi/Desktop/HackTM/FRDM KL26Z platform 06 nov/Project_Settings/Linker_Files" -Wl,-Map,"FRDM KL26Z platform.map" -specs=nano.specs -specs=nosys.specs -o "FRDM KL26Z platform.elf"  ./Sources/System/Scheduler/io_sch.o ./Sources/System/Scheduler/io_sch_cnf.o  ./Sources/System/Os/io_os.o  ./Sources/System/Error_handling/io_traps.o  ./Sources/Other_functions/io_func.o  ./Sources/MCU_drivers/Wdt/io_wdt.o  ./Sources/MCU_drivers/Tpm/io_tpm.o ./Sources/MCU_drivers/Tpm/io_tpm_cnf.o  ./Sources/MCU_drivers/Timer/io_tim.o  ./Sources/MCU_drivers/Pcs/io_pcs.o ./Sources/MCU_drivers/Pcs/io_pcs_cnf.o  ./Sources/MCU_drivers/Int/io_int.o ./Sources/MCU_drivers/Int/io_int_cnf.o  ./Sources/MCU_drivers/I2c/io_i2c.o ./Sources/MCU_drivers/I2c/io_i2c_cnf.o  ./Sources/MCU_drivers/Dio/io_dio.o  ./Sources/MCU_drivers/Asy/io_asy.o ./Sources/MCU_drivers/Asy/io_asy_cnf.o  ./Sources/MCU_drivers/Adc/io_adc.o ./Sources/MCU_drivers/Adc/io_adc_cnf.o  ./Sources/HW_drivers/Stepper_motor/io_smc.o ./Sources/HW_drivers/Stepper_motor/io_smc_cnf.o  ./Sources/HW_drivers/Sensors/Proximity/io_sens_ir.o  ./Sources/HW_drivers/Sensors/Accel_Magnet/FX0S8700.o  ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_cnf_ti8833.o ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_ti8833.o  ./Sources/Application/Speed_calc/app_robo_speed_calc.o  ./Sources/Application/Path_planner/app_robo_path_planner.o  ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o  ./Sources/Application/Distance_calc/app_robo_dist_calc.o  ./Sources/Application/Car_movement/app_robo_car_movement.o  ./Sources/Application/Bluetooth/io_bluetooth.o  ./Sources/main.o  ./Project_Settings/Startup_Code/startup_MKL26Z4.o ./Project_Settings/Startup_Code/system_MKL26Z4.o   
 'Finished building target: FRDM KL26Z platform.elf'
+' '
+13:58:33 **** Clean-only build of configuration Debug for project FRDM KL26Z platform 06 nov ****
+make clean 
+rm -rf  ./Sources/System/Scheduler/io_sch.o ./Sources/System/Scheduler/io_sch_cnf.o  ./Sources/System/Os/io_os.o  ./Sources/System/Error_handling/io_traps.o  ./Sources/Other_functions/io_func.o  ./Sources/MCU_drivers/Wdt/io_wdt.o  ./Sources/MCU_drivers/Tpm/io_tpm.o ./Sources/MCU_drivers/Tpm/io_tpm_cnf.o  ./Sources/MCU_drivers/Timer/io_tim.o  ./Sources/MCU_drivers/Pcs/io_pcs.o ./Sources/MCU_drivers/Pcs/io_pcs_cnf.o  ./Sources/MCU_drivers/Int/io_int.o ./Sources/MCU_drivers/Int/io_int_cnf.o  ./Sources/MCU_drivers/I2c/io_i2c.o ./Sources/MCU_drivers/I2c/io_i2c_cnf.o  ./Sources/MCU_drivers/Dio/io_dio.o  ./Sources/MCU_drivers/Asy/io_asy.o ./Sources/MCU_drivers/Asy/io_asy_cnf.o  ./Sources/MCU_drivers/Adc/io_adc.o ./Sources/MCU_drivers/Adc/io_adc_cnf.o  ./Sources/HW_drivers/Stepper_motor/io_smc.o ./Sources/HW_drivers/Stepper_motor/io_smc_cnf.o  ./Sources/HW_drivers/Sensors/Proximity/io_sens_ir.o  ./Sources/HW_drivers/Sensors/Accel_Magnet/FX0S8700.o  ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_cnf_ti8833.o ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_ti8833.o  ./Sources/Application/Speed_calc/app_robo_speed_calc.o  ./Sources/Application/Path_planner/app_robo_path_planner.o  ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.o  ./Sources/Application/Distance_calc/app_robo_dist_calc.o  ./Sources/Application/Car_movement/app_robo_car_movement.o  ./Sources/Application/Bluetooth/io_bluetooth.o  ./Sources/main.o  ./Project_Settings/Startup_Code/startup_MKL26Z4.o ./Project_Settings/Startup_Code/system_MKL26Z4.o  ./Sources/System/Scheduler/io_sch.d ./Sources/System/Scheduler/io_sch_cnf.d  ./Sources/System/Os/io_os.d  ./Sources/System/Error_handling/io_traps.d  ./Sources/Other_functions/io_func.d  ./Sources/MCU_drivers/Wdt/io_wdt.d  ./Sources/MCU_drivers/Tpm/io_tpm.d ./Sources/MCU_drivers/Tpm/io_tpm_cnf.d  ./Sources/MCU_drivers/Timer/io_tim.d  ./Sources/MCU_drivers/Pcs/io_pcs.d ./Sources/MCU_drivers/Pcs/io_pcs_cnf.d  ./Sources/MCU_drivers/Int/io_int.d ./Sources/MCU_drivers/Int/io_int_cnf.d  ./Sources/MCU_drivers/I2c/io_i2c.d ./Sources/MCU_drivers/I2c/io_i2c_cnf.d  ./Sources/MCU_drivers/Dio/io_dio.d  ./Sources/MCU_drivers/Asy/io_asy.d ./Sources/MCU_drivers/Asy/io_asy_cnf.d  ./Sources/MCU_drivers/Adc/io_adc.d ./Sources/MCU_drivers/Adc/io_adc_cnf.d  ./Sources/HW_drivers/Stepper_motor/io_smc.d ./Sources/HW_drivers/Stepper_motor/io_smc_cnf.d  ./Sources/HW_drivers/Sensors/Proximity/io_sens_ir.d  ./Sources/HW_drivers/Sensors/Accel_Magnet/FX0S8700.d  ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_cnf_ti8833.d ./Sources/HW_drivers/H-bridge/ti8833/io_hbr_ti8833.d  ./Sources/Application/Speed_calc/app_robo_speed_calc.d  ./Sources/Application/Path_planner/app_robo_path_planner.d  ./Sources/Application/Obstacle_avoidance/app_robo_obst_avoid.d  ./Sources/Application/Distance_calc/app_robo_dist_calc.d  ./Sources/Application/Car_movement/app_robo_car_movement.d  ./Sources/Application/Bluetooth/io_bluetooth.d  ./Sources/main.d  ./Project_Settings/Startup_Code/system_MKL26Z4.d  ./Project_Settings/Startup_Code/startup_MKL26Z4.d  "FRDM KL26Z platform.elf"
 ' '

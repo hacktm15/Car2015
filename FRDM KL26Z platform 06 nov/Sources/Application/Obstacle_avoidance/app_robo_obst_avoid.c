@@ -1,0 +1,195 @@
+/**************************************************************************
+
+COPYRIGHT (C) $Date: Nov 8, 2015 $
+$CompanyInfo: CONTINENTAL AUTOMOTIVE GMBH $
+ALL RIGHTS RESERVED.
+
+The reproduction, transmission or use of this document or its contents is
+not permitted without express written authority.
+Offenders will be liable for damages. All rights, including rights created
+by patent grant or registration of a utility model or design, are reserved.
+---------------------------------------------------------------------------
+
+$ProjectName: FRDM KL26-Z PLATFORM $
+
+$Log: app_robo_obst_avoid.h $
+
+$Author: Flueran Gabriel $
+
+ ****************************************************************************/
+
+#include "HW_drivers/H-bridge/ti8833/io_hbr_cnf_ti8833.h"
+#include "HW_drivers/Sensors/Proximity/io_sens_ir.h"
+
+#include "Application/Bluetooth/io_bluetooth.h"
+#include "Application/Car_movement/app_robo_car_movement.h"
+#include "Application/Distance_calc/app_robo_dist_calc.h"
+#include "Application/Speed_calc/app_robo_speed_calc.h"
+#include "Application/Path_planner/app_robo_path_planner.h"
+
+#include "app_robo_obst_avoid.h"
+
+uint32 Algo_Robo_Oa_TimerCarStopped;
+uint32 Algo_Robo_Oa_TimerCarMoveForward;
+uint32 Algo_Robo_Oa_TimerCarMoveBackward;
+uint32 Algo_Robo_Oa_TimerCarRotateLeft;
+uint32 Algo_Robo_Oa_TimerCarRotateRight;
+
+void Algo_Robo_Pp_InitializeObstAvoid(void)
+{
+	Algo_Robo_Oa_TimerCarStopped = 0;
+	Algo_Robo_Oa_TimerCarMoveForward = 0;
+	Algo_Robo_Oa_TimerCarMoveBackward = 0;
+	Algo_Robo_Oa_TimerCarRotateLeft = 0;
+	Algo_Robo_Oa_TimerCarRotateRight = 0;
+}
+
+void Algo_Robo_ObstAvoidManager(void)
+{
+	if(Algo_Robo_Pp_CarTask == ALGO_ROBO_PP_CAR_TASK_DEFAULT)
+	{
+		switch(Algo_Robo_Pp_CarMovement)
+		{
+		case ALGO_ROBO_PP_CAR_STOPPED:
+		{
+			switch(Algo_Robo_Pp_LastCarMovement)
+			{
+			case ALGO_ROBO_PP_CAR_MOVING_FORWARD:
+			{
+				if(Io_Sens_sensorLeftDistanceCm < ALGO_ROBO_PP_CAR_LENGTH_CM)
+				{
+					if(Io_Sens_sensorRightDistanceCm < ALGO_ROBO_PP_CAR_LENGTH_CM)
+					{
+						// Obstacle to the right too. Go back.
+					}
+					else
+					{
+						// Free space to the right. Rotate right.
+					}
+				}
+				else
+				{
+					// Free space to the left. Rotate left.
+					// Car is rotated 90 deg to the left.
+					/* TODO FLUERAN: comunicatie cu telefonul => unghiul de rotire */
+					Algo_Robo_Oa_TimerCarRotateLeft = Algo_Robo_Pp_CalculateRotationTime(ALGO_ROBO_OA_MOVING_DUTYCYCLE);
+					Algo_Robo_Cm_RotateCarLeft(ALGO_ROBO_OA_MOVING_DUTYCYCLE);
+				}
+
+				break;
+			}
+			case ALGO_ROBO_PP_CAR_MOVING_BACKWARD:
+			{
+				// Car is rotated 90 deg to the right.
+				/* TODO FLUERAN: comunicatie cu telefonul => unghiul de rotire */
+				Algo_Robo_Pp_TimerCarRotateRight = Algo_Robo_Pp_CalculateRotationTime(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
+				Algo_Robo_Cm_RotateCarRight(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
+				break;
+			}
+			case ALGO_ROBO_PP_CAR_ROTATING_RIGHT:
+			{
+				if(Io_Sens_sensorFrontDistanceCm < ALGO_ROBO_PP_FRONT_REAR_DIST_THOLD_CM)
+				{
+					// Obstacle in front of car; car is put in PENDING state.
+
+					Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_PENDING;
+					Algo_Robo_Pp_TimerPendingState = 0;
+				}
+				else
+				{
+					// Car moves forward.
+					Algo_Robo_Pp_MoveForwardCm = (uint16)((ALGO_ROBO_PP_CAR_WIDTH_CM / 2) + (uint16)(Algo_Robo_Pp_DistanceLastObstacleRightCm) + ALGO_ROBO_PP_SENSOR_PLACEMENT_ERROR_CM);
+					Algo_Robo_Cm_MoveCarForward(ALGO_ROBO_PP_PARKING_DUTYCYCLE);
+				}
+				break;
+			}
+
+			case ALGO_ROBO_PP_CAR_ROTATING_LEFT: { break; }
+			case ALGO_ROBO_PP_CAR_STOPPED: { break; }
+			default: break;
+			}
+			break;
+		}
+		case ALGO_ROBO_PP_CAR_MOVING_FORWARD:
+		{
+			if(Io_Sens_sensorFrontDistanceCm < ALGO_ROBO_PP_FRONT_REAR_DIST_THOLD_CM)
+			{
+				// Obstacle in front of car; car is STOPPED and put in PENDING state.
+				Algo_Robo_Cm_StopCar();
+
+			}
+			else
+			{
+				// Do nothing; car continues to move forward.
+			}
+			Algo_Robo_Pp_LastCarMovement = ALGO_ROBO_PP_CAR_MOVING_FORWARD;
+
+			break;
+		}
+		case ALGO_ROBO_PP_CAR_ROTATING_LEFT:
+		{
+			/* TODO FLUERAN: if angle is 90 deg. then stop */
+			if(Algo_Robo_Pp_TimerCarRotateLeft == 0)
+			{
+				// Car has rotated with the angle needed; car is STOPPED and put in CAR PARKED state.
+				Algo_Robo_Cm_StopCar();
+			}
+			else
+			{
+				// Car keeps rotating left.
+			}
+			Algo_Robo_Pp_LastCarMovement = ALGO_ROBO_PP_CAR_ROTATING_LEFT;
+
+			break;
+		}
+		case ALGO_ROBO_PP_CAR_MOVING_BACKWARD:
+		{
+			if(Io_Sens_sensorRearDistanceCm < ALGO_ROBO_PP_FRONT_REAR_DIST_THOLD_CM)
+			{
+				// Obstacle behind car; car is STOPPED and put in PENDING state.
+				Algo_Robo_Cm_StopCar();
+
+				Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_PENDING;
+				Algo_Robo_Pp_TimerPendingState = 0;
+			}
+			else
+			{
+				if(Algo_Robo_Pp_MoveBackCm == 0)
+				{
+					// Car has covered the backward distance needed; car is STOPPED.
+					Algo_Robo_Cm_StopCar();
+				}
+				else
+				{
+					// Car keeps moving backwards.
+				}
+				//Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_PARALLEL_PARK;
+			}
+			Algo_Robo_Pp_LastCarMovement = ALGO_ROBO_PP_CAR_MOVING_BACKWARD;
+
+			break;
+		}
+		case ALGO_ROBO_PP_CAR_ROTATING_RIGHT:
+		{
+			/* TODO FLUERAN: if angle is 90 deg. then stop */
+			if(Algo_Robo_Pp_TimerCarRotateRight == 0)
+			{
+				// Car has rotated with the angle needed; car is STOPPED.
+				Algo_Robo_Cm_StopCar();
+			}
+			else
+			{
+				// Car keeps rotating right.
+			}
+			//Algo_Robo_Pp_CarState = ALGO_ROBO_PP_CAR_STATE_PARALLEL_PARK;
+			Algo_Robo_Pp_LastCarMovement = ALGO_ROBO_PP_CAR_ROTATING_RIGHT;
+
+			break;
+		}
+
+
+		default: break;
+		}
+	}
+	else {}
+}

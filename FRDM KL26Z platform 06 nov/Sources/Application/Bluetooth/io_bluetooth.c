@@ -41,6 +41,7 @@ int dutycycle=0;
 int wait=0;
 int delaysend=0;
 char sensor;
+char rotationValue = '0';
 
 char mask(char mod,uint8 value)
 {
@@ -75,7 +76,6 @@ char mask(char mod,uint8 value)
 
 void Io_Bluetooth_State()
 {
-
 	switch(state)
 	{
 
@@ -139,8 +139,36 @@ void Io_Bluetooth_State()
 			Io_Asy_Start(0);
 			sensor=0;
 		}
+		if(delaysend == 5)
+		{
+			if(App_Robo_RotationLeftSend == TRUE)
+			{
+				rotationValue = 'L';
+
+				Io_Asy_TxData(0,1,&rotationValue);
+				Io_Asy_Start(0);
+				rotationValue = '0';
+
+				App_Robo_RotationLeftSend = FALSE;
+			}
+			else
+			{
+				if(App_Robo_RotationRightSend == TRUE)
+				{
+					rotationValue = 'R';
+
+					Io_Asy_TxData(0,1,&rotationValue);
+					Io_Asy_Start(0);
+					rotationValue = '0';
+
+					App_Robo_RotationRightSend = FALSE;
+				}
+				else { }
+			}
+		}
+
 		delaysend++;
-		if(delaysend==5)
+		if(delaysend==6)
 			delaysend=0;
 
 		switch(reception[0])
@@ -176,6 +204,12 @@ void Io_Bluetooth_State()
 		case '-':
 			// decrease speed
 			state=MINUS;
+			break;
+		case 'L':
+			App_Robo_RotationLeftFeedback = TRUE;
+			break;
+		case 'R':
+			App_Robo_RotationRightFeedback = TRUE;
 			break;
 		default:
 			break;

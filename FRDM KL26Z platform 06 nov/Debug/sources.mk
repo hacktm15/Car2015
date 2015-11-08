@@ -44,6 +44,7 @@ Sources/HW_drivers/Sensors/Accel_Magnet \
 Sources/HW_drivers/H-bridge/ti8833 \
 Sources/Application/Speed_calc \
 Sources/Application/Path_planner \
+Sources/Application/Obstacle_avoidance \
 Sources/Application/Distance_calc \
 Sources/Application/Car_movement \
 Sources/Application/Bluetooth \

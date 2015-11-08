@@ -160,6 +160,9 @@ void Io_Sch_PrjHookTask200ms(void)
 		Algo_Robo_Pp_DetermineNextCarState();
 	}
 	else {}
+
+	//test: Io_Hbr_Drv8833_Update(IO_HBR_DRV8833_STATE_FORWARD,0x2000,IO_HBR_MOTORS_LEFT);
+	//test: Io_Hbr_Drv8833_Update(IO_HBR_DRV8833_STATE_FORWARD,0x2000,IO_HBR_MOTORS_RIGHT);
 }
 
 void Io_Sch_PrjHookTask1000ms(void)

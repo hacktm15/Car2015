@@ -122,6 +122,11 @@ extern uint32 Algo_Robo_Pp_TimerSpotDetectedState;
 extern uint32 Algo_Robo_Pp_TimerParallelParkState;
 extern uint32 Algo_Robo_Pp_TimerCarParkedState;
 
+extern uint8 App_Robo_RotationLeftFeedback;
+extern uint8 App_Robo_RotationRightFeedback;
+extern uint8 App_Robo_RotationLeftSend;
+extern uint8 App_Robo_RotationRightSend;
+
 extern uint8 Algo_Robo_Pp_ParallelParkFlag;
 
 /** end of External Global variables and constants **/
