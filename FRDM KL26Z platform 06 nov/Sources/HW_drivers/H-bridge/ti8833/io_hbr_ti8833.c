@@ -34,7 +34,6 @@ uint8 *hbr_drv8833_state;
 
 void Io_Hbr_Drv8833_Initialization(const Io_Hbr_Drv8833_Cnf_Struct *ptr_cfg)
 {
-
 	uint8 i;
 	uint16 temp_stby;
 

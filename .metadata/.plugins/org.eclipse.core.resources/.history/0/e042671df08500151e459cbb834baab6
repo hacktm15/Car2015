@@ -1,0 +1,161 @@
+/****************************************************************************
+
+COPYRIGHT (C) $Date: Nov 3, 2015 $
+$CompanyInfo: CONTINENTAL AUTOMOTIVE GMBH $
+ALL RIGHTS RESERVED.
+
+The reproduction, transmission or use of this document or its contents is
+not permitted without express written authority.
+Offenders will be liable for damages. All rights, including rights created
+by patent grant or registration of a utility model or design, are reserved.
+---------------------------------------------------------------------------
+
+$ProjectName: FRDM KL26-Z PLATFORM $
+
+$Log: io_sch_cnf.c  $
+
+$Author: PES contribution $
+
+ ****************************************************************************/
+
+#include "System/Os/io_os.h"
+#include "System/Scheduler/io_sch_cnf.h"
+
+#include "MCU_drivers/Adc/io_adc_cnf.h"
+#include "MCU_drivers/Asy/io_asy.h"
+#include "MCU_drivers/Dio/io_dio.h"
+#include "MCU_drivers/I2c/io_i2c_cnf.h"
+#include "MCU_drivers/Int/io_int_cnf.h"
+#include "MCU_drivers/Pcs/io_pcs_cnf.h"
+#include "MCU_drivers/Timer/io_tim.h"
+#include "MCU_drivers/Tpm/io_tpm_cnf.h"
+#include "MCU_drivers/Wdt/io_wdt.h"
+
+#include "HW_drivers/H-bridge/ti8833/io_hbr_cnf_ti8833.h"
+#include "HW_drivers/Sensors/Proximity/io_sens_ir.h"
+#include "HW_drivers/Sensors/Accel_Magnet/FX0S8700.h"
+#include "HW_drivers/Stepper_motor/io_smc_cnf.h"
+
+#include "Application/Bluetooth/io_bluetooth.h"
+#include "Application/Car_movement/app_robo_car_movement.h"
+#include "Application/Distance_calc/app_robo_dist_calc.h"
+#include "Application/Speed_calc/app_robo_speed_calc.h"
+#include "Application/Path_planner/app_robo_path_planner.h"
+
+#include "io_sch_cnf.h"
+
+static void Io_Sch_PrjHookTaskBackground(void);
+static void Io_Sch_PrjHookTask1ms(void);
+static void Io_Sch_PrjHookTask10ms(void);
+static void Io_Sch_PrjHookTask50ms(void);
+static void Io_Sch_PrjHookTask100ms(void);
+static void Io_Sch_PrjHookTask1000ms(void);
+
+uint32 Io_Sch_TaskCounter0ms;
+uint32 Io_Sch_TaskCounter1ms;
+uint32 Io_Sch_TaskCounter10ms;
+uint32 Io_Sch_TaskCounter50ms;
+uint32 Io_Sch_TaskCounter100ms;
+uint32 Io_Sch_TaskCounter1000ms;
+
+const Io_Sch_OsConfigTaskStruct Io_Sch_OsTasks[]=
+{
+		/*  Period         Function           */
+		{    0, Io_Sch_PrjHookTaskBackground},
+		{    1, Io_Sch_PrjHookTask1ms},
+		{   10, Io_Sch_PrjHookTask10ms},
+		{   50, Io_Sch_PrjHookTask50ms},
+		{  100, Io_Sch_PrjHookTask100ms},
+		{ 1000, Io_Sch_PrjHookTask1000ms}
+};
+
+const Io_Sch_OsConfigStruct Io_Sch_OsConfig[] =
+{
+		{
+				sizeof(Io_Sch_OsTasks)/sizeof(Io_Sch_OsConfigTaskStruct),
+				(Io_Sch_OsConfigTaskStruct *) Io_Sch_OsTasks
+		}
+};
+
+
+void Io_Sch_PrjHookTaskBackground(void)
+{
+	Io_Sch_TaskCounter0ms++;
+	Io_Os_PriorityHandler();
+}
+
+void Io_Sch_PrjHookTask1ms(void)
+{
+	Io_Sch_TaskCounter1ms++;
+	Io_Os_PeriodicHandler();
+
+}
+
+void Io_Sch_PrjHookTask10ms(void)
+{
+	Io_Sch_TaskCounter10ms++;
+
+	/* Call the Watchdog periodic service */
+	Io_Wdt_Service();
+
+	/* Read data from all the ADC channels */
+	Io_Adc_Autoscan();
+
+	/* Sensors trigger */
+
+	/* end of Sensors trigger */
+
+	/* Operations for sensors data */
+	/*
+	if(Io_Sens_sensorSamplesCounter == SENS_NO_OF_MEASUREMENTS)
+	{
+		Io_Sens_sensorSamplesCounter = 0;
+	}
+	else
+	{
+		// Do nothing; value is ok.
+	}
+	Algo_Dc_GetAllSensorsSample();
+	Io_Sens_sensorSamplesCounter++;
+	*/
+	/* end of Operations for sensors data */
+}
+
+void Io_Sch_PrjHookTask50ms(void)
+{
+	Io_Sch_TaskCounter50ms++;
+
+	/* Call the Bluetooth state handler. */
+	//Io_Bluetooth_State();
+}
+
+void Io_Sch_PrjHookTask100ms(void)
+{
+	Io_Sch_TaskCounter100ms++;
+
+	/* Sensors data read */
+
+	/* end of Sensors data read */
+
+	/* Get distance values from the sensors. */
+	/*
+	Algo_Dc_CalculateSensorsDistances();
+
+	if(Algo_Robo_Pp_CarTask == ALGO_ROBO_PP_CAR_TASK_PARALLEL_PARK)
+	{
+		// Increase timers, calculate covered distances.
+		Algo_Robo_Pp_CarDecisionScheduler();
+		// Determine the next state of the car based on the previously calculated values.
+		Algo_Robo_Pp_DetermineNextCarState();
+	}
+	else {}
+	*/
+}
+
+
+void Io_Sch_PrjHookTask1000ms(void)
+{
+	Io_Sch_TaskCounter1000ms++;
+
+}
+

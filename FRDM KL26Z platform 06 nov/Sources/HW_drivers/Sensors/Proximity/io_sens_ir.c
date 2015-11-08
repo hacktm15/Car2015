@@ -53,7 +53,7 @@ uint16 Io_Sens_sensorRightDistanceMm;
 uint16 Io_Sens_sensorLeftDistanceMm;
 uint16 Io_Sens_sensorRearDistanceMm;
 
-uint8 delay;
+uint8 delay[4];
 
 uint8 Io_Sens_sensorSamplesCounter;
 uint8 Io_Sens_USONIC_sensorSamplesCounter;
@@ -71,8 +71,12 @@ uint8 Io_Sens_USONIC_sensorSamplesCounter;
 void Io_Sens_Initialization(void)
 {
 	uint8 tempIndex;
+	uint8 i;
 
-	delay = 0;
+	for (i=0; i<4; i++)
+	{
+		delay[i]=0;
+	}
 
 	Io_Sens_measurementmV = 0;
 	Io_Sens_measurementuS = 0;
@@ -117,17 +121,23 @@ void Io_Sens_Initialization(void)
 void Io_Sens_Usonic_TriggerPulse(uint16 PortPin, uint32 channel, uint16 *sampleVector)
 {
 	uint32 Measurement = 0;
+	uint8 i, aux = 0;
 
-	if (delay == 0)
+	i = ((channel & 0x00000F00) >> 8) - 1;
+
+	if (delay[i] == 0)
 	{
 		Io_Dio_SetPinLevel(PortPin, IO_PCS_LEVEL_LOW);
-	} else if (delay == 1)
+		aux = Io_Dio_GetPinLevel(PortPin);
+	} else if (delay[i] == 1)
 	{
 		Io_Dio_SetPinLevel(PortPin, IO_PCS_LEVEL_HIGH);
-	} else if (delay == 2)
+		aux = Io_Dio_GetPinLevel(PortPin);
+	} else if (delay[i] == 2)
 	{
 		Io_Dio_SetPinLevel(PortPin, IO_PCS_LEVEL_LOW);
-	} else if (delay == 3)
+		aux = Io_Dio_GetPinLevel(PortPin);
+	} else if (delay[i] == 3)
 	{
 		Measurement = Io_Tpm_GetPulseWidth(channel);
 		Measurement /= 1000;
@@ -137,11 +147,11 @@ void Io_Sens_Usonic_TriggerPulse(uint16 PortPin, uint32 channel, uint16 *sampleV
 		{
 			Io_Sens_USONIC_sensorSamplesCounter = 0;
 		}
-	} else if (delay == 10)
+	} else if (delay[i] == 10)
 	{
-		delay = 0;
+		delay[i] = 0;
 	}
-	delay ++;
+	delay[i] ++;
 }
 
 /* FUNCTION NAME: Io_Sens_GetSensorMeasurementmV

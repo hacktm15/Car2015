@@ -1,4 +1,4 @@
-00:54:12 **** Incremental Build of configuration Debug for project FRDM KL26Z platform 06 nov ****
+11:05:40 **** Incremental Build of configuration Debug for project FRDM KL26Z platform 06 nov ****
 make all 
 'Building file: ../Sources/System/Scheduler/io_sch.c'
 'Invoking: Cross ARM C Compiler'
@@ -289,6 +289,10 @@ arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-ch
 'Building file: ../Sources/HW_drivers/Sensors/Proximity/io_sens_ir.c'
 'Invoking: Cross ARM C Compiler'
 arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g3 -I"../Sources" -I"../Includes" -std=c99 -Wall -MMD -MP -MF"Sources/HW_drivers/Sensors/Proximity/io_sens_ir.d" -MT"Sources/HW_drivers/Sensors/Proximity/io_sens_ir.o" -c -o "Sources/HW_drivers/Sensors/Proximity/io_sens_ir.o" "../Sources/HW_drivers/Sensors/Proximity/io_sens_ir.c"
+../Sources/HW_drivers/Sensors/Proximity/io_sens_ir.c: In function 'Io_Sens_Usonic_TriggerPulse':
+../Sources/HW_drivers/Sensors/Proximity/io_sens_ir.c:124:11: warning: variable 'aux' set but not used [-Wunused-but-set-variable]
+  uint8 i, aux = 0;
+           ^
 'Finished building: ../Sources/HW_drivers/Sensors/Proximity/io_sens_ir.c'
 ' '
 'Building file: ../Sources/HW_drivers/Sensors/Accel_Magnet/FX0S8700.c'
@@ -322,7 +326,7 @@ In file included from ../Sources/MCU_drivers/Asy/io_asy.h:27:0,
                     ^
 ../Sources/MCU_drivers/Asy/io_asy_cnf.h:208:20: warning: inline function 'Io_Asy_ClearStatus' declared but never defined [enabled by default]
 ../Sources/HW_drivers/H-bridge/ti8833/io_hbr_ti8833.c: In function 'Io_Hbr_Drv8833_Get_State':
-../Sources/HW_drivers/H-bridge/ti8833/io_hbr_ti8833.c:146:1: warning: control reaches end of non-void function [-Wreturn-type]
+../Sources/HW_drivers/H-bridge/ti8833/io_hbr_ti8833.c:145:1: warning: control reaches end of non-void function [-Wreturn-type]
  }
  ^
 'Finished building: ../Sources/HW_drivers/H-bridge/ti8833/io_hbr_ti8833.c'
@@ -422,5 +426,5 @@ arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-ch
 'Finished building target: FRDM KL26Z platform.elf'
 ' '
 
-00:54:28 Build Finished (took 15s.945ms)
+11:05:55 Build Finished (took 15s.749ms)
 

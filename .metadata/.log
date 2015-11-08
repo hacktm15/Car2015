@@ -259,3 +259,244 @@ java.lang.IllegalStateException: Need an underlying widget to be able to set the
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+
+!ENTRY org.eclipse.debug.core 4 2 2015-11-08 01:15:09.364
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.debug.core".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:361)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:201)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:211)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.readMemory(GDBEventListener.java:56)
+	at org.eclipse.cdt.embsysregview.views.TreeRegister.readValue(TreeRegister.java:154)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:867)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.gdbSuspendListener(EmbSysRegView.java:903)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.handleDebugEvents(GDBEventListener.java:108)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.run(DebugPlugin.java:1151)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.dispatch(DebugPlugin.java:1187)
+	at org.eclipse.debug.core.DebugPlugin$EventDispatchJob.run(DebugPlugin.java:431)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.debug.core 4 125 2015-11-08 01:15:09.366
+!MESSAGE An exception occurred while dispatching debug events.
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:361)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:201)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:211)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.readMemory(GDBEventListener.java:56)
+	at org.eclipse.cdt.embsysregview.views.TreeRegister.readValue(TreeRegister.java:154)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:867)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.gdbSuspendListener(EmbSysRegView.java:903)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.handleDebugEvents(GDBEventListener.java:108)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.run(DebugPlugin.java:1151)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.dispatch(DebugPlugin.java:1187)
+	at org.eclipse.debug.core.DebugPlugin$EventDispatchJob.run(DebugPlugin.java:431)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.debug.core 4 2 2015-11-08 01:35:52.904
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.debug.core".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:361)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:201)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:211)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.readMemory(GDBEventListener.java:56)
+	at org.eclipse.cdt.embsysregview.views.TreeRegister.readValue(TreeRegister.java:154)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:867)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.gdbSuspendListener(EmbSysRegView.java:903)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.handleDebugEvents(GDBEventListener.java:108)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.run(DebugPlugin.java:1151)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.dispatch(DebugPlugin.java:1187)
+	at org.eclipse.debug.core.DebugPlugin$EventDispatchJob.run(DebugPlugin.java:431)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.debug.core 4 125 2015-11-08 01:35:52.905
+!MESSAGE An exception occurred while dispatching debug events.
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:361)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:201)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:211)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.readMemory(GDBEventListener.java:56)
+	at org.eclipse.cdt.embsysregview.views.TreeRegister.readValue(TreeRegister.java:154)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:867)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.gdbSuspendListener(EmbSysRegView.java:903)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.handleDebugEvents(GDBEventListener.java:108)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.run(DebugPlugin.java:1151)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.dispatch(DebugPlugin.java:1187)
+	at org.eclipse.debug.core.DebugPlugin$EventDispatchJob.run(DebugPlugin.java:431)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.debug.core 4 2 2015-11-08 09:56:53.587
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.debug.core".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:361)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:201)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:211)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.readMemory(GDBEventListener.java:56)
+	at org.eclipse.cdt.embsysregview.views.TreeRegister.readValue(TreeRegister.java:154)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:867)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.gdbSuspendListener(EmbSysRegView.java:903)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.handleDebugEvents(GDBEventListener.java:108)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.run(DebugPlugin.java:1151)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.dispatch(DebugPlugin.java:1187)
+	at org.eclipse.debug.core.DebugPlugin$EventDispatchJob.run(DebugPlugin.java:431)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.debug.core 4 125 2015-11-08 09:56:53.588
+!MESSAGE An exception occurred while dispatching debug events.
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:361)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:201)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:211)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.readMemory(GDBEventListener.java:56)
+	at org.eclipse.cdt.embsysregview.views.TreeRegister.readValue(TreeRegister.java:154)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:867)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.gdbSuspendListener(EmbSysRegView.java:903)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.handleDebugEvents(GDBEventListener.java:108)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.run(DebugPlugin.java:1151)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.dispatch(DebugPlugin.java:1187)
+	at org.eclipse.debug.core.DebugPlugin$EventDispatchJob.run(DebugPlugin.java:431)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY com.pemicro.debug.gdbjtag.pne 4 5012 2015-11-08 10:30:42.371
+!MESSAGE Error in final launch sequence
+!STACK 1
+org.eclipse.core.runtime.CoreException: Failed to execute MI command:
+-target-select remote localhost:7224
+
+Error message from debugger back end:
+Remote communication error.  Target disconnected.: No error.
+	at org.eclipse.cdt.dsf.concurrent.Query.get(Query.java:115)
+	at com.pemicro.debug.gdbjtag.pne.LaunchConfigurationDelegate.launchDebugSession(LaunchConfigurationDelegate.java:278)
+	at com.pemicro.debug.gdbjtag.pne.LaunchConfigurationDelegate.launchDebugger(LaunchConfigurationDelegate.java:86)
+	at com.pemicro.debug.gdbjtag.pne.LaunchConfigurationDelegate.launch(LaunchConfigurationDelegate.java:73)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:885)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.lang.Exception: Remote communication error.  Target disconnected.: No error.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:926)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:755)
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2015-11-08 10:30:42.405
+!MESSAGE Failed to execute MI command:
+-target-select remote localhost:7224
+
+Error message from debugger back end:
+Remote communication error.  Target disconnected.: No error.
+!STACK 0
+java.lang.Exception: Remote communication error.  Target disconnected.: No error.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:926)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:755)
+
+!ENTRY org.eclipse.debug.core 4 2 2015-11-08 10:30:49.347
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.debug.core".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:361)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:201)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:211)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.readMemory(GDBEventListener.java:56)
+	at org.eclipse.cdt.embsysregview.views.TreeRegister.readValue(TreeRegister.java:154)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:867)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.gdbSuspendListener(EmbSysRegView.java:903)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.handleDebugEvents(GDBEventListener.java:108)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.run(DebugPlugin.java:1151)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.dispatch(DebugPlugin.java:1187)
+	at org.eclipse.debug.core.DebugPlugin$EventDispatchJob.run(DebugPlugin.java:431)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.debug.core 4 125 2015-11-08 10:30:49.348
+!MESSAGE An exception occurred while dispatching debug events.
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:361)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:201)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:211)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.readMemory(GDBEventListener.java:56)
+	at org.eclipse.cdt.embsysregview.views.TreeRegister.readValue(TreeRegister.java:154)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:867)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.gdbSuspendListener(EmbSysRegView.java:903)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.handleDebugEvents(GDBEventListener.java:108)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.run(DebugPlugin.java:1151)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.dispatch(DebugPlugin.java:1187)
+	at org.eclipse.debug.core.DebugPlugin$EventDispatchJob.run(DebugPlugin.java:431)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.debug.core 4 2 2015-11-08 11:06:14.903
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.debug.core".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:361)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:201)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:211)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.readMemory(GDBEventListener.java:56)
+	at org.eclipse.cdt.embsysregview.views.TreeRegister.readValue(TreeRegister.java:154)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:867)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.gdbSuspendListener(EmbSysRegView.java:903)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.handleDebugEvents(GDBEventListener.java:108)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.run(DebugPlugin.java:1151)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.dispatch(DebugPlugin.java:1187)
+	at org.eclipse.debug.core.DebugPlugin$EventDispatchJob.run(DebugPlugin.java:431)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.debug.core 4 125 2015-11-08 11:06:14.904
+!MESSAGE An exception occurred while dispatching debug events.
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:361)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:201)
+	at org.eclipse.cdt.embsysregview.views.GDBSessionTranslator.readMemory(GDBSessionTranslator.java:211)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.readMemory(GDBEventListener.java:56)
+	at org.eclipse.cdt.embsysregview.views.TreeRegister.readValue(TreeRegister.java:154)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:867)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.updateTreeFields(EmbSysRegView.java:872)
+	at org.eclipse.cdt.embsysregview.views.EmbSysRegView.gdbSuspendListener(EmbSysRegView.java:903)
+	at org.eclipse.cdt.embsysregview.views.GDBEventListener.handleDebugEvents(GDBEventListener.java:108)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.run(DebugPlugin.java:1151)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.dispatch(DebugPlugin.java:1187)
+	at org.eclipse.debug.core.DebugPlugin$EventDispatchJob.run(DebugPlugin.java:431)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)

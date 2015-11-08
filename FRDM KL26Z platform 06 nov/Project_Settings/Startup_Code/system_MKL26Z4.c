@@ -129,10 +129,10 @@ void SystemInit (void) {
  /*** TODO FRDM KL26Z PLATFORM TEAM: not used because of WDT specific functions defined ***/
 
   /* Watchdog disable */
-//#if (DISABLE_WDOG)
+#if (DISABLE_WDOG)
   /* SIM_COPC: COPT=0,COPCLKS=0,COPW=0 */
-//  SIM->COPC = (uint32_t)0x00u;
-//#endif /* (DISABLE_WDOG) */
+  SIM->COPC = (uint32_t)0x00u;
+#endif /* (DISABLE_WDOG) */
 
 /*** end of to do ***/
 

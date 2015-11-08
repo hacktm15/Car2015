@@ -118,7 +118,7 @@ __isr_vector:
     .type    Reset_Handler, %function
 Reset_Handler:
     cpsid   i               /* Mask interrupts */
-    ldr r0, =_NVIC_ICER    /* Disable interrupts and clear pending flags */
+    ldr r0, =_NVIC_ICER     /* Disable interrupts and clear pending flags */
     ldr r1, =_NVIC_ICPR
     ldr r2, =0xFFFFFFFF
     str r2, [r0]            /* NVIC_ICER - clear enable IRQ register */

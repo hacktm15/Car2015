@@ -82,6 +82,7 @@ void Io_Sch_PrjHookTaskBackground(void)
 {
 	Io_Sch_TaskCounter0ms++;
 	Io_Os_PriorityHandler();
+
 }
 
 void Io_Sch_PrjHookTask1ms(void)
@@ -96,7 +97,7 @@ void Io_Sch_PrjHookTask10ms(void)
 	Io_Sch_TaskCounter10ms++;
 
 	/* Call the Watchdog periodic service */
-	Io_Wdt_Service();
+	//Io_Wdt_Service();
 
 	/* Read data from all the ADC channels */
 	Io_Adc_Autoscan();
@@ -150,6 +151,9 @@ void Io_Sch_PrjHookTask100ms(void)
 	}
 	else {}
 	*/
+
+	//Io_Hbr_Drv8833_Update(IO_HBR_DRV8833_STATE_FORWARD,0x2000,IO_HBR_MOTORS_RIGHT);
+	//Io_Hbr_Drv8833_Update(IO_HBR_DRV8833_STATE_FORWARD,0x2000,IO_HBR_MOTORS_LEFT);
 }
 
 
