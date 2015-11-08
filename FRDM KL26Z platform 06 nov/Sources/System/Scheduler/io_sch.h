@@ -30,7 +30,7 @@ $Author: PES contribution $
 /** Defines **/
 
 /** Maximum number of tasks */
-#define IO_SCH_MAX_TASKS        		6
+#define IO_SCH_MAX_TASKS        		7
 
 /** end of Defines **/
 

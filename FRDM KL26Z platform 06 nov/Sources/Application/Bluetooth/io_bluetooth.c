@@ -277,6 +277,11 @@ void Io_Bluetooth_State()
 	case PLUS:
 	{
 		dutycycle+=10;
+		if(dutycycle >= 70)
+		{
+			dutycycle = 70;
+		}
+		else {}
 
 		Io_Dio_SetPinLevel(SET_LED_GREEN, LED_OFF);
 		Io_Dio_SetPinLevel(SET_LED_BLUE, LED_ON);
@@ -299,14 +304,14 @@ void Io_Bluetooth_State()
 	case MINUS:
 	{
 		dutycycle-=10;
-		if(dutycycle<=-70)
-			dutycycle=-70;
+		if(dutycycle <= -70)
+			dutycycle = -70;
 		Io_Dio_SetPinLevel(SET_LED_GREEN, LED_OFF);
 		Io_Dio_SetPinLevel(SET_LED_BLUE, LED_ON);
 		Io_Dio_SetPinLevel(SET_LED_RED, LED_ON);
 		state=RECEIVE;
 
-		if(dutycycle>0)
+		if(dutycycle > 0)
 			Algo_Robo_Cm_MoveCarForward(dutycycle);
 		else if(dutycycle==0)
 		{

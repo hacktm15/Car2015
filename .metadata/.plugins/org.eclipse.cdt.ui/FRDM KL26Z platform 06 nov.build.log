@@ -1,4 +1,4 @@
-11:05:40 **** Incremental Build of configuration Debug for project FRDM KL26Z platform 06 nov ****
+11:53:47 **** Incremental Build of configuration Debug for project FRDM KL26Z platform 06 nov ****
 make all 
 'Building file: ../Sources/System/Scheduler/io_sch.c'
 'Invoking: Cross ARM C Compiler'
@@ -426,5 +426,5 @@ arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-ch
 'Finished building target: FRDM KL26Z platform.elf'
 ' '
 
-11:05:55 Build Finished (took 15s.749ms)
+11:54:03 Build Finished (took 15s.713ms)
 

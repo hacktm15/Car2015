@@ -74,7 +74,7 @@ int main(void)
 	Io_Asy_Initialization(&config_asy_device);
 
 	/* Call the initialization interface for WDT (Watchdog) driver (not configurable) */
-	//Io_Wdt_Init();
+	Io_Wdt_Init();
 
 	/** end of Initialization calls for MCU Drivers **/
 
@@ -83,10 +83,6 @@ int main(void)
 
 	/* Call the initialization interfaces for HBR (H-Bridge) driver */
 	Io_Hbr_Drv8833_Initialization(Io_Hbr_Drv8833_Cnf);
-	//test:
-	//test:
-	//Io_Hbr_Drv8833_Update(IO_HBR_DRV8833_STATE_FORWARD,0x2000,IO_HBR_MOTORS_LEFT);
-	//Io_Hbr_Drv8833_Update(IO_HBR_DRV8833_STATE_FORWARD,0x2000,IO_HBR_MOTORS_RIGHT);
 
 	/* Call the initialization interfaces for SENSORS driver */
 	Io_Sens_Initialization();

@@ -49,6 +49,7 @@ static void Io_Sch_PrjHookTask1ms(void);
 static void Io_Sch_PrjHookTask10ms(void);
 static void Io_Sch_PrjHookTask50ms(void);
 static void Io_Sch_PrjHookTask100ms(void);
+static void Io_Sch_PrjHookTask200ms(void);
 static void Io_Sch_PrjHookTask1000ms(void);
 
 uint32 Io_Sch_TaskCounter0ms;
@@ -56,6 +57,7 @@ uint32 Io_Sch_TaskCounter1ms;
 uint32 Io_Sch_TaskCounter10ms;
 uint32 Io_Sch_TaskCounter50ms;
 uint32 Io_Sch_TaskCounter100ms;
+uint32 Io_Sch_TaskCounter200ms;
 uint32 Io_Sch_TaskCounter1000ms;
 
 const Io_Sch_OsConfigTaskStruct Io_Sch_OsTasks[]=
@@ -66,6 +68,7 @@ const Io_Sch_OsConfigTaskStruct Io_Sch_OsTasks[]=
 		{   10, Io_Sch_PrjHookTask10ms},
 		{   50, Io_Sch_PrjHookTask50ms},
 		{  100, Io_Sch_PrjHookTask100ms},
+		{  200, Io_Sch_PrjHookTask200ms},
 		{ 1000, Io_Sch_PrjHookTask1000ms}
 };
 
@@ -97,7 +100,7 @@ void Io_Sch_PrjHookTask10ms(void)
 	Io_Sch_TaskCounter10ms++;
 
 	/* Call the Watchdog periodic service */
-	//Io_Wdt_Service();
+	Io_Wdt_Service();
 
 	/* Read data from all the ADC channels */
 	Io_Adc_Autoscan();
@@ -107,7 +110,7 @@ void Io_Sch_PrjHookTask10ms(void)
 	/* end of Sensors trigger */
 
 	/* Operations for sensors data */
-	/*
+
 	if(Io_Sens_sensorSamplesCounter == SENS_NO_OF_MEASUREMENTS)
 	{
 		Io_Sens_sensorSamplesCounter = 0;
@@ -118,7 +121,7 @@ void Io_Sch_PrjHookTask10ms(void)
 	}
 	Algo_Dc_GetAllSensorsSample();
 	Io_Sens_sensorSamplesCounter++;
-	*/
+
 	/* end of Operations for sensors data */
 }
 
@@ -127,7 +130,7 @@ void Io_Sch_PrjHookTask50ms(void)
 	Io_Sch_TaskCounter50ms++;
 
 	/* Call the Bluetooth state handler. */
-	//Io_Bluetooth_State();
+	Io_Bluetooth_State();
 }
 
 void Io_Sch_PrjHookTask100ms(void)
@@ -139,8 +142,15 @@ void Io_Sch_PrjHookTask100ms(void)
 	/* end of Sensors data read */
 
 	/* Get distance values from the sensors. */
-	/*
+
 	Algo_Dc_CalculateSensorsDistances();
+
+
+}
+
+void Io_Sch_PrjHookTask200ms(void)
+{
+	Algo_Robo_Dc_CalculateCarDistanceCovered();
 
 	if(Algo_Robo_Pp_CarTask == ALGO_ROBO_PP_CAR_TASK_PARALLEL_PARK)
 	{
@@ -150,12 +160,7 @@ void Io_Sch_PrjHookTask100ms(void)
 		Algo_Robo_Pp_DetermineNextCarState();
 	}
 	else {}
-	*/
-
-	//Io_Hbr_Drv8833_Update(IO_HBR_DRV8833_STATE_FORWARD,0x2000,IO_HBR_MOTORS_RIGHT);
-	//Io_Hbr_Drv8833_Update(IO_HBR_DRV8833_STATE_FORWARD,0x2000,IO_HBR_MOTORS_LEFT);
 }
-
 
 void Io_Sch_PrjHookTask1000ms(void)
 {
